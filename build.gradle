@@ -1,0 +1,43 @@
+buildscript {
+    apply from: 'dependencies.gradle'
+    repositories {
+        jcenter()
+        mavenCentral()
+        google()
+    }
+    ext {
+        kotlin_version = '1.4.31'
+    }
+    dependencies {
+        classpath "${classPath.buildGradle}"
+        classpath "${classPath.gradleRetroLambda}"
+        classpath "${classPath.retroLambda}"
+        classpath "${classPath.firebaseCrashlyticsGradle}"
+        classpath "${classPath.googleServices}"
+        classpath "${classPath.kotlinGradle}"
+    }
+
+    configurations.classpath.exclude group: 'com.android.tools.external.lombok'
+
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        maven {
+            url "https://maven.google.com"
+        }
+        mavenCentral()
+        google()
+        jcenter {
+            url = 'https://dl.bintray.com/swrve-inc/android'
+        }
+        flatDir {
+            dirs 'libs'
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

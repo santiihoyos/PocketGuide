@@ -1,0 +1,7 @@
+include ':base'
+include ':notes'
+include ':data'
+include ':settings'
+include ':characters'
+include ':app'
+rootProject.name = "MarvelGuide"
