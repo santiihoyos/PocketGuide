@@ -2,7 +2,7 @@ package com.santiihoyos.marvelguide.di
 
 import android.app.Application
 import com.santiihoyos.data.di.DataComponent
-import com.santiihoyos.heroes.list.di.CharactersComponent
+import com.santiihoyos.characters.di.CharactersComponent
 import com.santiihoyos.marvelguide.MainActivity
 import dagger.BindsInstance
 import dagger.Component

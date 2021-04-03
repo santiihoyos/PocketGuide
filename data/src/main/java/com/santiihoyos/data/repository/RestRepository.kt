@@ -2,6 +2,7 @@ package com.santiihoyos.data.repository
 
 import com.santiihoyos.data.response.CharacterResponse
 import com.santiihoyos.data.response.CharactersResponse
+import retrofit2.Call
 
 interface RestRepository {
 
@@ -9,10 +10,10 @@ interface RestRepository {
      * Get all characters of Rick&Morty universe
      * Paginated!!!
      */
-    fun getCharactersPage(page: Int): CharactersResponse
+    suspend fun getCharactersAtPage(page: Int): CharactersResponse
 
     /**
      * Get Only one character searching by id
      */
-    fun getCharacterById(id: String): CharacterResponse
+    suspend fun getCharacterById(id: String): CharacterResponse
 }

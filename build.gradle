@@ -29,9 +29,6 @@ allprojects {
         }
         mavenCentral()
         google()
-        jcenter {
-            url = 'https://dl.bintray.com/swrve-inc/android'
-        }
         flatDir {
             dirs 'libs'
         }

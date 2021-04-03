@@ -5,7 +5,7 @@ import com.santiihoyos.data.response.Response
 /**
  * Mapper interface, defines standard mapper of app
  */
-fun interface Mapper<in OE : Response, out EE> {
+fun interface Mapper<OE : Response, EE> {
 
     fun map(originEntity: OE): EE
 

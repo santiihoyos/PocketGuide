@@ -38,6 +38,5 @@ object DataModule {
     }
 
     @Provides
-    @Singleton
     fun provideRestRepository(): RestRepository = RetrofitRestRepository.getInstance()
 }

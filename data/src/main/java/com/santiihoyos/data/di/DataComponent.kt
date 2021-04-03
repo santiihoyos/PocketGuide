@@ -1,6 +1,7 @@
 package com.santiihoyos.data.di
 
 import android.app.Application
+import com.santiihoyos.data.repository.RestRepository
 import dagger.BindsInstance
 import dagger.Component
 
@@ -8,6 +9,13 @@ import dagger.Component
     modules = [DataModule::class, DataBindsModule::class]
 )
 interface DataComponent {
+
+    /**
+     * Exposes to other components RestRepository implementation.
+     *
+     * @return RestRepository implementation
+     */
+    fun getRestRepository(): RestRepository
 
     companion object {
 
