@@ -1,11 +1,14 @@
 package com.santiihoyos.characters.detail.view
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.Group
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.ContextCompat
+import androidx.core.widget.ImageViewCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.santiihoyos.base.feature.abstracts.BaseActivity
@@ -16,9 +19,9 @@ import com.santiihoyos.characters.R
 import com.santiihoyos.characters.detail.viewModel.CharacterDetailViewModel
 import com.santiihoyos.characters.di.CharactersComponent
 import com.santiihoyos.characters.entity.Character
-import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
@@ -37,14 +40,6 @@ class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
     private val loadingGroup: Group by lazy {
 
         findViewById(R.id.characters_charactersActivity_loading_group)
-    }
-
-    /**
-     * Full screen loading
-     */
-    private val photo: AppCompatImageView by lazy {
-
-        findViewById(R.id.characterDetailActivity_photo_AppCompatImageView)
     }
 
     private val toolbar: Toolbar by lazy {
@@ -77,6 +72,7 @@ class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
         setContentView(R.layout.activity_character_detail)
         setupCharacterDetail()
 
+        toolbar.title = ""
         setSupportActionBar(toolbar)
     }
 
@@ -115,14 +111,37 @@ class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
      */
     private fun refreshDataValues(character: Character) {
 
-        //photo.loadFromUrl(character.image)
-
-        Picasso.get().load(character.image)
-            .placeholder(R.drawable.character_photo_placeholder)
-            .fit().centerInside().into(photo)
-
-        supportActionBar?.title = character.name
-     }
+        toolbar.title = character.name
+        setSupportActionBar(toolbar)
+        val photo = findViewById<AppCompatImageView>(R.id.characterDetailActivity_photo_AppCompatImageView)
+        val status = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_status)
+        val statusBullet = findViewById<AppCompatImageView>(R.id.characterDetailActivity_value_status_bullet)
+        val name = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_name)
+        val type = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_type)
+        val species = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_species)
+        val gender = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_gender)
+        val episodes = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_episodes)
+        photo.loadFromUrl(character.image, R.drawable.character_photo_placeholder)
+        name.text = character.name
+        status.text = character.status.name.toLowerCase(Locale.getDefault())
+        ImageViewCompat.setImageTintList(
+            statusBullet, ColorStateList.valueOf(
+                ContextCompat.getColor(
+                    this, when (character.status) {
+                        Character.Status.ALIVE -> R.color.characterDetail_status_alive
+                        Character.Status.DEAD -> R.color.characterDetail_status_dead
+                        Character.Status.UNKNOWN -> R.color.characterDetail_status_unknown
+                    }
+                )
+            )
+        )
+        type.text = if (character.type.isEmpty()) "-" else character.type
+        species.text = character.species
+        gender.text = character.gender.name.toLowerCase(Locale.getDefault())
+        episodes.text = character.episode.joinToString(separator = ", ") {
+            it.substring(it.lastIndexOf("/") + 1)
+        }
+    }
 
     /**
      * Shows generic error retry dialog for character detail error on load
@@ -147,5 +166,16 @@ class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
     private fun onCancelErrorDialogClick() {
 
         dismissDialog()
+    }
+
+    private fun resolveStatusColor(status: Character.Status): Int {
+        return ContextCompat.getColor(
+            this,
+            when (status) {
+                Character.Status.ALIVE -> R.color.characterDetail_status_alive
+                Character.Status.DEAD -> R.color.characterDetail_status_dead
+                Character.Status.UNKNOWN -> R.color.characterDetail_status_unknown
+            }
+        )
     }
 }

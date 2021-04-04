@@ -18,7 +18,8 @@ class CharacterDetailInteractorImpl @Inject constructor(
 
     override suspend fun getCharacterById(id: String): Character? {
 
-        delay(2000)
+        //Simulate delay to show loadings views... TODO: remove!
+        delay(500)
 
         try {
 

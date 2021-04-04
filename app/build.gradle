@@ -19,9 +19,19 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+            storeFile file("../test_keystore.jks")
+            storePassword "11paths"
+            keyAlias "11paths"
+            keyPassword "11paths"
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            debuggable false
+            signingConfig signingConfigs.release //Comentar para Jenkins
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

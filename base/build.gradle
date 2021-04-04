@@ -60,6 +60,9 @@ dependencies {
     // Feature module Support for Navigation
     api "androidx.navigation:navigation-dynamic-features-fragment:2.3.4"
 
+    //Paging recyclerView library
+    api "androidx.paging:paging-runtime-ktx:3.0.0-beta03"
+
     testImplementation 'junit:junit:4.13.2'
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

@@ -6,17 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import com.santiihoyos.base.feature.extensions.loadFromUrl
 import com.santiihoyos.characters.R
 import com.santiihoyos.characters.entity.Character
 
 /**
- * [RecyclerView.Adapter] that can display a [DummyItem].
+ * [RecyclerView.Adapter] that can display a [Character].
  */
 class CharacterRecyclerViewAdapter(
-    var characters: List<Character>,
     val onCharacterClickListener: (Character) -> Unit
-) : RecyclerView.Adapter<CharacterRecyclerViewAdapter.ViewHolder>() {
+) : PagingDataAdapter<Character, CharacterRecyclerViewAdapter.ViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -25,10 +26,25 @@ class CharacterRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(character = characters[position])
+
+        getItem(position)?.let(holder::bind)
     }
 
-    override fun getItemCount(): Int = characters.size
+    companion object {
+
+        private val diffCallback = object : DiffUtil.ItemCallback<Character>() {
+
+            override fun areItemsTheSame(oldItem: Character, newItem: Character): Boolean {
+
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: Character, newItem: Character): Boolean {
+
+                return oldItem == newItem
+            }
+        }
+    }
 
     /**
      * Holder for Character item
@@ -51,7 +67,7 @@ class CharacterRecyclerViewAdapter(
         fun bind(character: Character) {
 
             name.text = character.name
-            photo.loadFromUrl(character.image)
+            photo.loadFromUrl(character.image, R.drawable.character_photo_placeholder)
             itemView.setOnClickListener { onCharacterClickListener(character) }
         }
     }

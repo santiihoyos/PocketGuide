@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
-    <color name="characterDetail_progress_background">#99FFFFFF</color>
-    
+
+    <color name="characterDetail_status_alive">#4B9524</color>
+    <color name="characterDetail_status_dead">#A0211C</color>
+    <color name="characterDetail_status_unknown">#474D51</color>
+
 </resources>

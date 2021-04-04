@@ -1,20 +1,19 @@
 package com.santiihoyos.characters.list.viewmodel
 
-import androidx.lifecycle.MutableLiveData
+import androidx.paging.PagingData
 import com.santiihoyos.base.feature.abstracts.BaseViewModel
 import com.santiihoyos.characters.entity.Character
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Required contract by view layer (HeroListFragment)
  */
 abstract class CharacterListViewModel: BaseViewModel() {
 
-    abstract val characters: MutableLiveData<List<Character>?>
+    abstract val currentCharactersResult: Flow<PagingData<Character>>?
 
     /**
      * Load or reload list of characters from new page.
      */
-    abstract fun loadNextCharacters()
-
-    abstract fun reloadCharacters()
+    abstract suspend fun loadNextCharacters(): Flow<PagingData<Character>>
 }

@@ -9,8 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.Group
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.santiihoyos.base.feature.abstracts.BaseFragment
 import com.santiihoyos.base.feature.extensions.gone
 import com.santiihoyos.base.feature.extensions.invisible
@@ -20,7 +20,11 @@ import com.santiihoyos.characters.detail.view.CharacterDetailActivityArgs
 import com.santiihoyos.characters.di.CharactersComponent
 import com.santiihoyos.characters.entity.Character
 import com.santiihoyos.characters.list.view.adapter.CharacterRecyclerViewAdapter
+import com.santiihoyos.characters.list.view.decorator.CharacterItemDecoration
 import com.santiihoyos.characters.list.viewmodel.CharacterListViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -37,14 +41,6 @@ class CharacterListFragment : BaseFragment<CharacterListViewModel>() {
     private val recyclerView: RecyclerView? by lazy {
 
         view?.findViewById(R.id.characters_charactersFragment_recycler)
-    }
-
-    /**
-     * SwipeRefreshLayout of characters items
-     */
-    private val swipeRefreshLayout: SwipeRefreshLayout? by lazy {
-
-        view?.findViewById(R.id.characters_charactersFragment_swipeRefresh)
     }
 
     /**
@@ -68,35 +64,11 @@ class CharacterListFragment : BaseFragment<CharacterListViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView(4)
-        setupSwipeRefreshLayout()
-        viewModel.loadNextCharacters()
-        viewModel.characters.observe(viewLifecycleOwner, ::refreshCharactersList)
+        setupRecyclerView(2)
         viewModel.isLoading.observe(viewLifecycleOwner, ::onLoadingChange)
     }
 
-    /**
-     * Set new characters objects to recycler View on notified new values
-     *
-     * @param newCharacters List of Character with new characters to show
-     */
-    private fun refreshCharactersList(newCharacters: List<Character>?) {
-
-        if (newCharacters.isNullOrEmpty()) {
-
-            recyclerView.invisible()
-        } else {
-
-            (recyclerView?.adapter as? CharacterRecyclerViewAdapter)?.run {
-
-                characters = newCharacters
-                notifyDataSetChanged()
-            }
-        }
-    }
-
     private fun onCharacterClickItem(character: Character) {
-
 
         findNavController().navigate(
             R.id.action_characterListFragment_to_characterDetailActivity,
@@ -116,15 +88,6 @@ class CharacterListFragment : BaseFragment<CharacterListViewModel>() {
 
             hideLoading()
         }
-    }
-
-    /**
-     * View actions when user swipes to refresh
-     */
-    private fun onSwipeToRefresh() {
-
-        viewModel.reloadCharacters()
-        swipeRefreshLayout?.isRefreshing = false
     }
 
     /**
@@ -152,23 +115,24 @@ class CharacterListFragment : BaseFragment<CharacterListViewModel>() {
     private fun setupRecyclerView(columnCount: Int) = recyclerView?.apply {
 
         layoutManager = when {
-
             columnCount <= 1 -> LinearLayoutManager(context)
             else -> GridLayoutManager(context, columnCount)
         }
-        adapter = CharacterRecyclerViewAdapter(
-            characters = listOf(),
+
+        val adapterInstance = CharacterRecyclerViewAdapter(
             onCharacterClickListener = ::onCharacterClickItem
         )
-    }
+        adapter = adapterInstance
 
+        addItemDecoration(CharacterItemDecoration(
+            resources.getDimension(R.dimen.character_list_item_margin).toInt(),
+            columnCount
+        ))
 
-    /**
-     * Setups SwipeRefreshLayout listener
-     */
-    private fun setupSwipeRefreshLayout() {
+        lifecycleScope.launch(Dispatchers.IO) {
 
-        swipeRefreshLayout?.setOnRefreshListener(::onSwipeToRefresh)
+            viewModel.loadNextCharacters().collectLatest(adapterInstance::submitData)
+        }
     }
 
     /**

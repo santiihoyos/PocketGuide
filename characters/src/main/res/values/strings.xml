@@ -10,5 +10,16 @@
     <!-- Character Detail -->
     <string name="characterDetailActivity_error_message">"Sorry, We have problems to get Character required. Please try again."</string>
     <string name="characterDetailActivity_loading">"Cargando detalle…"</string>
-    
+
+    <string name="characterDetailActivity_valueName_status">"estado:"</string>
+    <string name="characterDetailActivity_valueName_name">"nombre:"</string>
+    <string name="characterDetailActivity_valueName_species">"Especies:"</string>
+    <string name="characterDetailActivity_valueName_type">"tipo:"</string>
+    <string name="characterDetailActivity_valueName_gender">"género:"</string>
+    <string name="characterDetailActivity_valueName_episodes">"capitulos:"</string>
+
+    <string name="characterDetailActivity_status_alive">"vivo"</string>
+    <string name="characterDetailActivity_status_dead">"muerto"</string>
+    <string name="characterDetailActivity_status_unknown">"desconocido"</string>
+
 </resources>
