@@ -1,17 +1,22 @@
 package com.santiihoyos.characters.detail.view
 
 import android.os.Bundle
-import android.widget.LinearLayout
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.appcompat.widget.Toolbar
+import androidx.constraintlayout.widget.Group
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.santiihoyos.base.feature.abstracts.BaseActivity
-import com.santiihoyos.base.feature.extensions.gone
+import com.santiihoyos.base.feature.extensions.invisible
+import com.santiihoyos.base.feature.extensions.loadFromUrl
 import com.santiihoyos.base.feature.extensions.visible
 import com.santiihoyos.characters.R
 import com.santiihoyos.characters.detail.viewModel.CharacterDetailViewModel
 import com.santiihoyos.characters.di.CharactersComponent
 import com.santiihoyos.characters.entity.Character
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,12 +26,35 @@ class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
     @Inject
     override lateinit var viewModelProviderFactory: ViewModelProvider.Factory
 
+    private val detailContainer: CoordinatorLayout by lazy {
+
+        findViewById(R.id.characterDetailActivity_container_ConstraintLayout)
+    }
+
+    /**
+     * Group of loading views
+     */
+    private val loadingGroup: Group by lazy {
+
+        findViewById(R.id.characters_charactersActivity_loading_group)
+    }
+
     /**
      * Full screen loading
      */
-    private val progressBarLayout: LinearLayout by lazy {
+    private val photo: AppCompatImageView by lazy {
 
-        findViewById(R.id.characterDetail_general_progress)
+        findViewById(R.id.characterDetailActivity_photo_AppCompatImageView)
+    }
+
+    private val toolbar: Toolbar by lazy {
+
+        findViewById(R.id.toolbar)
+    }
+
+    private val loadingText: AppCompatTextView by lazy {
+
+        findViewById(R.id.characters_charactersFragment_loading_textView)
     }
 
     /**
@@ -48,6 +76,8 @@ class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_character_detail)
         setupCharacterDetail()
+
+        setSupportActionBar(toolbar)
     }
 
     /**
@@ -63,7 +93,8 @@ class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
             showErrorRetryDialog()
         } else {
 
-            progressBarLayout.visible()
+            loadingGroup.visible()
+            detailContainer.invisible()
             val character = viewModel.getCharacter(characterIdFromBundle)
             if (character == null) {
 
@@ -72,7 +103,8 @@ class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
 
                 refreshDataValues(character)
             }
-            progressBarLayout.gone()
+            detailContainer.visible()
+            loadingGroup.invisible()
         }
     }
 
@@ -82,8 +114,14 @@ class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
      * @param character - Character entity to paint
      */
     private fun refreshDataValues(character: Character) {
-        val nameTextView = findViewById<AppCompatTextView>(R.id.character_name)
-        (character.name + " " + character.id).also(nameTextView::setText)
+
+        //photo.loadFromUrl(character.image)
+
+        Picasso.get().load(character.image)
+            .placeholder(R.drawable.character_photo_placeholder)
+            .fit().centerInside().into(photo)
+
+        supportActionBar?.title = character.name
      }
 
     /**

@@ -9,5 +9,6 @@
 
     <!-- Character Detail -->
     <string name="characterDetailActivity_error_message">"Sorry, We have problems to get Character required. Please try again."</string>
-
+    <string name="characterDetailActivity_loading">"Cargando detalle…"</string>
+    
 </resources>
