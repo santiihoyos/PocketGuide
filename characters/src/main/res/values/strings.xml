@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Common -->
+    <string name="loading">"Loading…"</string>
+    
+    <!-- Character List -->
+    <string name="characterListFragment_error_message">"Sorry, We have problems to get Characters list. Please try again."</string>
+
+    <!-- Character Detail -->
+    <string name="characterDetailActivity_error_message">"Sorry, We have problems to get Character required. Please try again."</string>
+
+</resources>

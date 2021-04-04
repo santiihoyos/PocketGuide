@@ -2,8 +2,7 @@ package com.santiihoyos.base.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.santiihoyos.base.abstracts.BaseInteractor
-import com.santiihoyos.base.abstracts.BaseViewModel
+import com.santiihoyos.base.feature.abstracts.BaseViewModel
 import javax.inject.Inject
 import javax.inject.Provider
 

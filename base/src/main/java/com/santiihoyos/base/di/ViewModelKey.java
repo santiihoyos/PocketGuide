@@ -1,6 +1,6 @@
 package com.santiihoyos.base.di;
 
-import com.santiihoyos.base.abstracts.BaseViewModel;
+import com.santiihoyos.base.feature.abstracts.BaseViewModel;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

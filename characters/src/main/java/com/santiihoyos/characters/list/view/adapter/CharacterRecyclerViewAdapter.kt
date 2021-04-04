@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
-import com.santiihoyos.base.extensions.loadFromUrl
+import com.santiihoyos.base.feature.extensions.loadFromUrl
 import com.santiihoyos.characters.R
 import com.santiihoyos.characters.entity.Character
 

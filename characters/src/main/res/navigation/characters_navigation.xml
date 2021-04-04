@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/characters_navigation"
-    app:startDestination="@id/characterListFragment">
+    app:startDestination="@id/navigation_characterList">
 
     <activity
-        android:id="@+id/characterDetailActivity"
+        android:id="@+id/navigation_characterDetail"
         android:name="com.santiihoyos.characters.detail.view.CharacterDetailActivity"
         android:label="CharacterDetailActivity" >
         <argument
@@ -12,12 +12,12 @@
             app:argType="string" />
     </activity>
     <fragment
-        android:id="@+id/characterListFragment"
+        android:id="@+id/navigation_characterList"
         android:name="com.santiihoyos.characters.list.view.CharacterListFragment"
         android:label="CharacterListFragment" >
         <action
             android:id="@+id/action_characterListFragment_to_characterDetailActivity"
-            app:destination="@id/characterDetailActivity" />
+            app:destination="@id/navigation_characterDetail" />
     </fragment>
 
 </navigation>

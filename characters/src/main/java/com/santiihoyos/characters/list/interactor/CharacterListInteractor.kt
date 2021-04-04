@@ -1,6 +1,6 @@
 package com.santiihoyos.characters.list.interactor
 
-import com.santiihoyos.base.abstracts.BaseInteractor
+import com.santiihoyos.base.feature.abstracts.BaseInteractor
 import com.santiihoyos.characters.entity.Character
 
 /**

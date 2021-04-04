@@ -1,7 +1,7 @@
 package com.santiihoyos.characters.list.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.santiihoyos.base.abstracts.BaseViewModel
+import com.santiihoyos.base.feature.abstracts.BaseViewModel
 import com.santiihoyos.characters.entity.Character
 
 /**

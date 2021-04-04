@@ -1,0 +1,21 @@
+plugins {
+    id 'java-library'
+    id 'kotlin'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
+}
+
+dependencies {
+    def dependencies = rootProject.ext.dependencies
+
+    //Kotlin
+    implementation dependencies.kotlinStdlib8
+
+    //Retrofit and its JSON converter (Jackson)
+    api dependencies.retrofit
+    api dependencies.retrofitConverter
+    api dependencies.retrofitAdapter
+}

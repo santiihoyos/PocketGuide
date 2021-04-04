@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="baseActivity_generic_error_message">"Sorry We have problems now. Please try again after few minutes."</string>
+
+</resources>

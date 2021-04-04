@@ -1,9 +1,9 @@
 package com.santiihoyos.marvelguide.di
 
 import android.app.Application
-import com.santiihoyos.data.di.DataComponent
 import com.santiihoyos.characters.di.CharactersComponent
 import com.santiihoyos.marvelguide.MainActivity
+import com.santiihoyos.repository.di.RepositoryComponent
 import dagger.BindsInstance
 import dagger.Component
 
@@ -12,7 +12,7 @@ import dagger.Component
         AppModule::class
     ],
     dependencies = [
-        DataComponent::class,
+        RepositoryComponent::class,
         CharactersComponent::class
     ]
 )
@@ -20,14 +20,10 @@ interface AppComponent {
 
     /**
      * Injects MainActivity classes
+     *
+     * @param mainActivity - MainActivity instance to inject
      */
     fun inject(mainActivity: MainActivity)
-
-    //region exposed dependencies
-
-    fun getApplicationContext(application: Application)
-
-    //endregion
 
     companion object {
 
@@ -45,7 +41,7 @@ interface AppComponent {
 
             if (!this::instance.isInitialized) {
 
-                val dataComponent = DataComponent.init(application)
+                val dataComponent = RepositoryComponent.init(application)
                 val charactersComponent = CharactersComponent.init(application, dataComponent)
 
                 instance = DaggerAppComponent.builder()
@@ -62,7 +58,7 @@ interface AppComponent {
     @Component.Builder
     interface Builder {
 
-        fun dataComponent(dataComponent: DataComponent): Builder
+        fun dataComponent(dataComponent: RepositoryComponent): Builder
 
         fun charactersComponent(charactersComponent: CharactersComponent): Builder
 

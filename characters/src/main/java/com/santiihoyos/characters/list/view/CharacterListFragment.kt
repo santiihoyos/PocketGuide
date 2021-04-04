@@ -1,7 +1,6 @@
 package com.santiihoyos.characters.list.view
 
 import android.os.Bundle
-import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,12 +11,12 @@ import androidx.constraintlayout.widget.Group
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.santiihoyos.base.abstracts.BaseFragment
-import com.santiihoyos.base.extensions.gone
-import com.santiihoyos.base.extensions.invisible
-import com.santiihoyos.base.extensions.visible
+import com.santiihoyos.base.feature.abstracts.BaseFragment
+import com.santiihoyos.base.feature.extensions.gone
+import com.santiihoyos.base.feature.extensions.invisible
+import com.santiihoyos.base.feature.extensions.visible
 import com.santiihoyos.characters.R
-import com.santiihoyos.characters.detail.CharacterDetailActivityArgs
+import com.santiihoyos.characters.detail.view.CharacterDetailActivityArgs
 import com.santiihoyos.characters.di.CharactersComponent
 import com.santiihoyos.characters.entity.Character
 import com.santiihoyos.characters.list.view.adapter.CharacterRecyclerViewAdapter

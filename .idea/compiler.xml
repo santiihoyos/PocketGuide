@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.8" />
+    <bytecodeTargetLevel target="1.7">
+      <module name="MarvelGuide.app" target="1.8" />
+      <module name="MarvelGuide.base" target="1.8" />
+      <module name="MarvelGuide.characters" target="1.8" />
+      <module name="MarvelGuide.data" target="1.8" />
+      <module name="MarvelGuide.notes" target="1.8" />
+      <module name="MarvelGuide.settings" target="1.8" />
+      <module name="Pocket.app" target="1.8" />
+      <module name="Pocket.base" target="1.8" />
+      <module name="Pocket.characters" target="1.8" />
+      <module name="Pocket.notes" target="1.8" />
+      <module name="Pocket.settings" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

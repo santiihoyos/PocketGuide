@@ -3,7 +3,7 @@ package com.santiihoyos.characters.di
 import android.app.Application
 import com.santiihoyos.characters.detail.view.CharacterDetailActivity
 import com.santiihoyos.characters.list.view.CharacterListFragment
-import com.santiihoyos.data.di.DataComponent
+import com.santiihoyos.repository.di.RepositoryComponent
 import dagger.BindsInstance
 import dagger.Component
 
@@ -13,7 +13,7 @@ import dagger.Component
         CharactersModule::class
     ],
     dependencies = [
-        DataComponent::class
+        RepositoryComponent::class
     ]
 )
 interface CharactersComponent {
@@ -33,7 +33,7 @@ interface CharactersComponent {
          */
         fun init(
             application: Application,
-            dataComponent: DataComponent
+            dataComponent: RepositoryComponent
         ): CharactersComponent {
 
             if (!this::instance.isInitialized) {
@@ -54,7 +54,7 @@ interface CharactersComponent {
         @BindsInstance
         fun application(application: Application): Builder
 
-        fun dataComponent(dataComponent: DataComponent): Builder
+        fun dataComponent(dataComponent: RepositoryComponent): Builder
 
         fun build(): CharactersComponent
     }

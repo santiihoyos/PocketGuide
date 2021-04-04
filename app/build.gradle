@@ -10,7 +10,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.santiihoyos.cc.paradigma"
+        applicationId "com.santiihoyos.cc"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
@@ -25,6 +25,24 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "codeChallenge"
+
+    productFlavors {
+
+        //Flavor for Paradigma digital code challenge
+        rickAndMorty {
+            dimension "codeChallenge"
+            applicationIdSuffix = ".rickAndMorty"
+        }
+
+        //Flavor for OpenBank code challenge
+        marvel {
+            dimension "codeChallenge"
+            applicationIdSuffix = ".marvel"
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -40,11 +58,14 @@ dependencies {
 
     //features
     implementation project(path: ':base')
-    implementation project(path: ':characters')
     implementation project(path: ':settings')
+    implementation project(path: ':repository')
 
-    //data module
-    implementation project(path: ':data')
+    //For Paradigma Code challenge feature for RickAndMorty
+    rickAndMortyImplementation project(path: ':characters')
+
+    //For OpenBank Code challenge feature for RickAndMorty
+    marvelImplementation project(path: ':characters')
 
     //Dagger (dependency comes from :base only needs kapt)
     kapt dependencies.daggerCompiler

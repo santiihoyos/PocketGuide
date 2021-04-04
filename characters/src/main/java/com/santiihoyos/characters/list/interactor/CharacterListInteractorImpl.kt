@@ -1,14 +1,14 @@
 package com.santiihoyos.characters.list.interactor
 
-import com.santiihoyos.data.repository.RestRepository
+import com.santiihoyos.base_repository.Mapper
 import com.santiihoyos.characters.entity.Character
-import com.santiihoyos.data.Mapper
-import com.santiihoyos.data.response.CharacterResponse
+import com.santiihoyos.repositoryrickandmorty.RickAndMortyRestRepository
+import com.santiihoyos.repositoryrickandmorty.response.CharacterResponse
 import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class CharacterListInteractorImpl @Inject constructor(
-    private val restRepository: RestRepository,
+    private val restRepository: RickAndMortyRestRepository,
     private val characterMapper: Mapper<CharacterResponse, Character>
 ): CharacterListInteractor() {
 

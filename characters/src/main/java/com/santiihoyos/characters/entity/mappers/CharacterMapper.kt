@@ -1,8 +1,8 @@
 package com.santiihoyos.characters.entity.mappers
 
-import com.santiihoyos.data.Mapper
-import com.santiihoyos.data.response.CharacterResponse
+import com.santiihoyos.base_repository.Mapper
 import com.santiihoyos.characters.entity.Character
+import com.santiihoyos.repositoryrickandmorty.response.CharacterResponse
 import javax.inject.Inject
 
 const val STATUS_ALIVE = "Alive"
