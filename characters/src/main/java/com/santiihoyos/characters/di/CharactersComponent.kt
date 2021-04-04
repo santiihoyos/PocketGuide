@@ -1,6 +1,7 @@
 package com.santiihoyos.characters.di
 
 import android.app.Application
+import com.santiihoyos.characters.detail.view.CharacterDetailActivity
 import com.santiihoyos.characters.list.view.CharacterListFragment
 import com.santiihoyos.data.di.DataComponent
 import dagger.BindsInstance
@@ -18,6 +19,8 @@ import dagger.Component
 interface CharactersComponent {
 
     fun inject(characterListFragment: CharacterListFragment)
+
+    fun inject(characterListActivity: CharacterDetailActivity)
 
     companion object {
 

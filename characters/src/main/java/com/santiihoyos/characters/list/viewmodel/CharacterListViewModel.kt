@@ -9,10 +9,12 @@ import com.santiihoyos.characters.entity.Character
  */
 abstract class CharacterListViewModel: BaseViewModel() {
 
-    abstract val heroes: MutableLiveData<List<Character>?>
+    abstract val characters: MutableLiveData<List<Character>?>
 
     /**
      * Load or reload list of characters from new page.
      */
     abstract fun loadNextCharacters()
+
+    abstract fun reloadCharacters()
 }

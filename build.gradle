@@ -15,6 +15,9 @@ buildscript {
         classpath "${classPath.firebaseCrashlyticsGradle}"
         classpath "${classPath.googleServices}"
         classpath "${classPath.kotlinGradle}"
+
+        def nav_version = "2.3.4"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
     }
 
     configurations.classpath.exclude group: 'com.android.tools.external.lombok'

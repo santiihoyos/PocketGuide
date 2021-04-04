@@ -13,14 +13,14 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-abstract class DataBindsModule {
+internal abstract class DataBindsModule {
 
     @Binds
     abstract fun bindKeyValueRepository(repo: SharedPreferencesKeyValueRepository): KeyValueRepository
 }
 
 @Module
-object DataModule {
+internal object DataModule {
 
     private const val DEFAULT_PREFERENCES_NAME = "default"
 

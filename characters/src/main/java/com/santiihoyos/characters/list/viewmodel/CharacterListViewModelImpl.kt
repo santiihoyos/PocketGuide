@@ -9,17 +9,42 @@ import javax.inject.Inject
 
 class CharacterListViewModelImpl @Inject constructor(
     private val characterListInteractor: CharacterListInteractor
-): CharacterListViewModel() {
+) : CharacterListViewModel() {
 
     private var currentPage = 0
 
-    override val heroes: MutableLiveData<List<Character>?> = MutableLiveData()
+    override val characters: MutableLiveData<List<Character>?> = MutableLiveData()
 
     override fun loadNextCharacters() {
         viewModelScope.launch {
 
-            val characters = characterListInteractor.getNextCharacters(++currentPage)
-            heroes.postValue(characters.sortedBy { it.id })
+            isLoading.postValue(true)
+            refreshCharactersValue()
+            isLoading.postValue(false)
         }
+    }
+
+    override fun reloadCharacters() {
+        viewModelScope.launch {
+
+            isLoading.postValue(true)
+            //characters.postValue(emptyList())
+            //currentPage = 0
+            refreshCharactersValue()
+            isLoading.postValue(false)
+        }
+    }
+
+
+    private suspend fun refreshCharactersValue() {
+
+        val newCharacters = characterListInteractor.getNextCharacters(currentPage++)
+        this.characters.postValue(
+            mutableListOf(
+                *characters.value?.toTypedArray() ?: arrayOf(),
+                *newCharacters.toTypedArray()
+            )
+        )
+        this@CharacterListViewModelImpl.characters.postValue(newCharacters.sortedBy { it.id })
     }
 }

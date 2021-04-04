@@ -1,16 +1,19 @@
 package com.santiihoyos.characters.di
 
-import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.santiihoyos.base.abstracts.BaseViewModel
 import com.santiihoyos.base.di.ViewModelKey
 import com.santiihoyos.base.di.ViewModelProviderFactory
+import com.santiihoyos.characters.detail.interactor.CharacterDetailInteractor
+import com.santiihoyos.characters.detail.interactor.CharacterDetailInteractorImpl
+import com.santiihoyos.characters.detail.viewModel.CharacterDetailViewModel
+import com.santiihoyos.characters.detail.viewModel.CharacterDetailViewModelImpl
 import com.santiihoyos.characters.entity.Character
 import com.santiihoyos.characters.list.interactor.CharacterListInteractorImpl
 import com.santiihoyos.characters.list.interactor.CharacterListInteractor
 import com.santiihoyos.characters.list.viewmodel.CharacterListViewModel
 import com.santiihoyos.characters.list.viewmodel.CharacterListViewModelImpl
-import com.santiihoyos.characters.mappers.CharacterMapper
+import com.santiihoyos.characters.entity.mappers.CharacterMapper
 import com.santiihoyos.data.Mapper
 import com.santiihoyos.data.response.CharacterResponse
 import dagger.Binds
@@ -30,9 +33,21 @@ abstract class CharactersBindsModule {
     ): BaseViewModel
 
     @Binds
+    @IntoMap
+    @ViewModelKey(CharacterDetailViewModel::class)
+    abstract fun bindCharacterDetailViewModelContract(
+        characterDetailViewModel: CharacterDetailViewModelImpl
+    ): BaseViewModel
+
+    @Binds
     abstract fun bindCharacterListInteractorContract(
         characterListInteractorImpl: CharacterListInteractorImpl
     ): CharacterListInteractor
+
+    @Binds
+    abstract fun bindCharacterDetailInteractorContract(
+        characterListInteractorImpl: CharacterDetailInteractorImpl
+    ): CharacterDetailInteractor
 
     @Binds
     abstract fun bindCharacterMapper(
@@ -49,8 +64,6 @@ object CharactersModule {
     fun provideCharactersViewModelFactory(
         providersMap: Map<Class<out BaseViewModel>, @JvmSuppressWildcards Provider<BaseViewModel>>
     ): ViewModelProvider.Factory {
-
-        Log.i("MAPA:", providersMap.toString())
 
         if (!::viewModelFactory.isInitialized) {
 

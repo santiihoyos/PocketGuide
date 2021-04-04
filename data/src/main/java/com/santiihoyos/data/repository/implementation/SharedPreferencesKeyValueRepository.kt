@@ -7,7 +7,7 @@ import javax.inject.Inject
 /**
  * Implementation of KeyValueRepository
  */
-class SharedPreferencesKeyValueRepository @Inject constructor(
+internal class SharedPreferencesKeyValueRepository @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) : KeyValueRepository {
 

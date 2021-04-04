@@ -11,7 +11,7 @@ import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface RetrofitRestRepository : RestRepository {
+internal interface RetrofitRestRepository : RestRepository {
 
     companion object {
 

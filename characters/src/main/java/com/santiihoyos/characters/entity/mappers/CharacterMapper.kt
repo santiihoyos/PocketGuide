@@ -1,4 +1,4 @@
-package com.santiihoyos.characters.mappers
+package com.santiihoyos.characters.entity.mappers
 
 import com.santiihoyos.data.Mapper
 import com.santiihoyos.data.response.CharacterResponse
@@ -13,7 +13,7 @@ const val GENDER_MALE = "Male"
 const val GENDER_GENDERLESS = "Genderless"
 const val GENDER_UNKNOWN = "unknown"
 
-class CharacterMapper @Inject() constructor() : Mapper<CharacterResponse, Character> {
+class CharacterMapper @Inject constructor() : Mapper<CharacterResponse, Character> {
 
     override fun map(originEntity: CharacterResponse) = Character(
         id = originEntity.id,

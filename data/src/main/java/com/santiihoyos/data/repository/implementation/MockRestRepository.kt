@@ -5,7 +5,7 @@ import com.santiihoyos.data.response.CharacterResponse
 import com.santiihoyos.data.response.CharactersResponse
 import retrofit2.Call
 
-class MockRestRepository : RestRepository {
+internal class MockRestRepository : RestRepository {
 
     override suspend fun getCharactersAtPage(page: Int): CharactersResponse {
         TODO("Not yet implemented")

@@ -3,13 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_characters">
+    app:startDestination="@+id/characters_navigation">
 
-    <fragment
-        android:id="@+id/navigation_characters"
-        android:name="com.santiihoyos.characters.list.view.CharacterListFragment"
-        android:label="@string/title_character_list"
-        tools:layout="@layout/fragment_character_list" />
+    <include
+        android:id="@+id/characters_navigation"
+        app:graph="@navigation/characters_navigation" />
 
     <fragment
         android:id="@+id/navigation_home"

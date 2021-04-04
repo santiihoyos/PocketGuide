@@ -5,7 +5,7 @@ data class CharacterResponse(
     /**
      * The id of the character.
      */
-    val id: Int,
+    val id: String,
 
     /**
      * The name of the character.

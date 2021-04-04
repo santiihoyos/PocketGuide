@@ -4,6 +4,7 @@ import com.santiihoyos.data.repository.RestRepository
 import com.santiihoyos.characters.entity.Character
 import com.santiihoyos.data.Mapper
 import com.santiihoyos.data.response.CharacterResponse
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class CharacterListInteractorImpl @Inject constructor(
@@ -13,7 +14,7 @@ class CharacterListInteractorImpl @Inject constructor(
 
 
     override suspend fun getNextCharacters(page: Int): List<Character> {
-
+        delay(2000)
         return restRepository.getCharactersAtPage(page).results.map(characterMapper::map)
     }
 }
