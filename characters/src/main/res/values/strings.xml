@@ -8,18 +8,14 @@
     <string name="characterListFragment_error_message">"Sorry, We have problems to get Characters list. Please try again."</string>
 
     <!-- Character Detail -->
-    <string name="characterDetailActivity_error_message">"Sorry, We have problems to get Character required. Please try again."</string>
-    <string name="characterDetailActivity_loading">"Cargando detalle…"</string>
+    <string name="characterDetailActivity_error_message">"Sorry, We have problems to get required Character. Please try again."</string>
+    <string name="characterDetailActivity_error_save_fav_message">"Sorry, We have problems to save Character as favorite. Please try again."</string>
+    <string name="characterDetailActivity_loading">"Buscando a %s…"</string>
 
-    <string name="characterDetailActivity_valueName_status">"estado:"</string>
-    <string name="characterDetailActivity_valueName_name">"nombre:"</string>
+    <string name="characterDetailActivity_valueName_status">"Estado:"</string>
+    <string name="characterDetailActivity_valueName_name">"Nombre completo:"</string>
     <string name="characterDetailActivity_valueName_species">"Especies:"</string>
-    <string name="characterDetailActivity_valueName_type">"tipo:"</string>
-    <string name="characterDetailActivity_valueName_gender">"género:"</string>
-    <string name="characterDetailActivity_valueName_episodes">"capitulos:"</string>
-
-    <string name="characterDetailActivity_status_alive">"vivo"</string>
-    <string name="characterDetailActivity_status_dead">"muerto"</string>
-    <string name="characterDetailActivity_status_unknown">"desconocido"</string>
-
+    <string name="characterDetailActivity_valueName_type">"Tipo:"</string>
+    <string name="characterDetailActivity_valueName_gender">"Género:"</string>
+    <string name="characterDetailActivity_valueName_episodes">"Capitulos:"</string>
 </resources>

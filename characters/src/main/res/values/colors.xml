@@ -4,5 +4,6 @@
     <color name="characterDetail_status_alive">#4B9524</color>
     <color name="characterDetail_status_dead">#A0211C</color>
     <color name="characterDetail_status_unknown">#474D51</color>
-
+    <color name="heart_color">#f44336</color>
+    
 </resources>

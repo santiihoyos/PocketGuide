@@ -17,4 +17,15 @@ class CharacterDetailViewModelImpl @Inject constructor(
 
         return characterDetailInteractor.getCharacterById(characterId)
     }
+
+    override suspend fun saveAsFavorite(characterId: String): Boolean {
+
+        return characterDetailInteractor.saveFavoriteCharacterId(characterId)
+    }
+
+    override suspend fun isUserCharacterFavorite(characterId: String): Boolean {
+
+        val currentFavorite = characterDetailInteractor.getFavoriteCharacterId()
+        return currentFavorite == characterId
+    }
 }

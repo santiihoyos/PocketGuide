@@ -72,7 +72,7 @@ class CharacterListFragment : BaseFragment<CharacterListViewModel>() {
 
         findNavController().navigate(
             R.id.action_characterListFragment_to_characterDetailActivity,
-            CharacterDetailActivityArgs(character.id).toBundle()
+            CharacterDetailActivityArgs(character.id, character.name).toBundle()
         )
     }
 
@@ -128,6 +128,8 @@ class CharacterListFragment : BaseFragment<CharacterListViewModel>() {
             resources.getDimension(R.dimen.character_list_item_margin).toInt(),
             columnCount
         ))
+
+        setHasFixedSize(true)
 
         lifecycleScope.launch(Dispatchers.IO) {
 

@@ -1,6 +1,7 @@
 package com.santiihoyos.repository.di
 
 import android.app.Application
+import com.santiihoyos.base_repository.repository.KeyValueRepository
 import com.santiihoyos.repositoryrickandmorty.RickAndMortyRestRepository
 import dagger.BindsInstance
 import dagger.Component
@@ -16,6 +17,13 @@ interface RepositoryComponent{
      * @return RestRepository implementation
      */
     fun getRestRepository(): RickAndMortyRestRepository
+
+    /**
+     * Exposes to other components [KeyValueRepository] implementation.
+     *
+     * @return KeyValueRepository implementation
+     */
+    fun getKeyValueRepository(): KeyValueRepository
 
     companion object {
 

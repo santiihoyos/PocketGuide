@@ -16,7 +16,7 @@ import com.santiihoyos.characters.entity.Character
  * [RecyclerView.Adapter] that can display a [Character].
  */
 class CharacterRecyclerViewAdapter(
-    val onCharacterClickListener: (Character) -> Unit
+    val onCharacterClickListener: (character: Character) -> Unit
 ) : PagingDataAdapter<Character, CharacterRecyclerViewAdapter.ViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
