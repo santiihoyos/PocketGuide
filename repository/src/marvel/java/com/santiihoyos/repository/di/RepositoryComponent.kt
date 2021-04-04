@@ -1,7 +1,7 @@
 package com.santiihoyos.repository.di
 
 import android.app.Application
-import com.santiihoyos.repositoryrickandmorty.RickAndMortyRestRepository
+import com.santiihoyos.repositorymarvel.MarvelRestRepository
 import dagger.BindsInstance
 import dagger.Component
 
@@ -15,7 +15,7 @@ interface RepositoryComponent{
      *
      * @return RestRepository implementation
      */
-    fun getRestRepository(): RickAndMortyRestRepository
+    fun getRestRepository(): MarvelRestRepository
 
     companion object {
 

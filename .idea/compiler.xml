@@ -13,6 +13,12 @@
       <module name="Pocket.characters" target="1.8" />
       <module name="Pocket.notes" target="1.8" />
       <module name="Pocket.settings" target="1.8" />
+      <module name="PocketGuide.app" target="1.8" />
+      <module name="PocketGuide.base" target="1.8" />
+      <module name="PocketGuide.characters" target="1.8" />
+      <module name="PocketGuide.heroes" target="1.8" />
+      <module name="PocketGuide.notes" target="1.8" />
+      <module name="PocketGuide.settings" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

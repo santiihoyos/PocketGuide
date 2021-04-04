@@ -65,7 +65,7 @@ dependencies {
     rickAndMortyImplementation project(path: ':characters')
 
     //For OpenBank Code challenge feature for RickAndMorty
-    marvelImplementation project(path: ':characters')
+    marvelImplementation project(path: ':heroes')
 
     //Dagger (dependency comes from :base only needs kapt)
     kapt dependencies.daggerCompiler

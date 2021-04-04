@@ -3,8 +3,8 @@ package com.santiihoyos.repository.di
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import com.santiihoyos.repositoryrickandmorty.RetrofitRickAndMortyRestRepository
-import com.santiihoyos.repositoryrickandmorty.RickAndMortyRestRepository
+import com.santiihoyos.repositorymarvel.MarvelRestRepository
+import com.santiihoyos.repositorymarvel.RetrofitMarvelRestRepository
 import dagger.Module
 import dagger.Provides
 
@@ -27,5 +27,5 @@ internal object RepositoryModule {
     }
 
     @Provides
-    fun provideRestRepository(): RickAndMortyRestRepository = RetrofitRickAndMortyRestRepository.getInstance()
+    fun provideRestRepository(): MarvelRestRepository = RetrofitMarvelRestRepository.getInstance()
 }

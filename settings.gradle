@@ -1,3 +1,4 @@
+include ':heroes'
 include ':base_repository'
 include ':base'
 include ':repositoryRickAndMorty'
@@ -7,4 +8,4 @@ include ':notes'
 include ':settings'
 include ':characters'
 include ':app'
-rootProject.name = "MarvelGuide"
+rootProject.name = "PocketGuide"
