@@ -15,6 +15,6 @@ interface RickAndMortyRestRepository : RestRepository {
     /**
      * Get Only one character searching by id
      */
-    suspend fun getCharacterById(id: String): CharacterResponse?
+    suspend fun getCharacterById(id: String): CharacterResponse
 
 }

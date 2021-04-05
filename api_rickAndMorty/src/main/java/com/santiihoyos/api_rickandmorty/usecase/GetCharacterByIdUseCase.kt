@@ -1,20 +1,19 @@
 package com.santiihoyos.api_rickandmorty.usecase
 
 import com.santiihoyos.api_rickandmorty.RickAndMortyRestRepository
-import com.santiihoyos.api_rickandmorty.response.CharactersResponse
-import retrofit2.HttpException
+import com.santiihoyos.api_rickandmorty.response.CharacterResponse
 import com.santiihoyos.base_api.usecase.UseCaseException
+import retrofit2.HttpException
 import java.lang.Exception
 import javax.inject.Inject
 
-class GetCharactersPagingUseCase @Inject constructor(
+class GetCharacterByIdUseCase @Inject constructor(
     private val rickAndMortyRestRepository: RickAndMortyRestRepository
 ) {
 
-    suspend fun execute(pageNumber: Int): CharactersResponse = try {
+    suspend fun execute(characterId: String): CharacterResponse = try {
 
-        rickAndMortyRestRepository.getCharactersAtPage(pageNumber)
-
+        rickAndMortyRestRepository.getCharacterById(characterId)
     } catch (ex: HttpException) {
 
         throw UseCaseException(
@@ -25,4 +24,5 @@ class GetCharactersPagingUseCase @Inject constructor(
 
         TODO("manage other possible errors of this endpoint")
     }
+
 }

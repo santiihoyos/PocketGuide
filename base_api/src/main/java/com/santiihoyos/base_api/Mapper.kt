@@ -1,11 +1,11 @@
 package com.santiihoyos.base_api
 
-import com.santiihoyos.base_api.response.Response
+import com.santiihoyos.base_api.response.RestResponse
 
 /**
  * Mapper interface, defines standard mapper of app
  */
-fun interface Mapper<OE : Response, EE> {
+fun interface Mapper<OE : RestResponse, EE> {
 
     fun map(originEntity: OE): EE
 

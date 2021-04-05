@@ -1,6 +1,6 @@
 package com.santiihoyos.api_rickandmorty.response
 
-import com.santiihoyos.base_api.response.Response
+import com.santiihoyos.base_api.response.RestResponse
 
 
 /**
@@ -18,7 +18,7 @@ data class CharactersResponse(
      */
     val results: List<CharacterResponse>,
 
-    ): Response() {
+    ): RestResponse() {
 
     /**
      * Entity for Info response

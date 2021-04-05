@@ -1,6 +1,6 @@
 package com.santiihoyos.api_marvel.response
 
-import com.santiihoyos.base_api.response.Response
+import com.santiihoyos.base_api.response.RestResponse
 
 data class HeroResponse(
 
@@ -66,4 +66,4 @@ data class HeroResponse(
      */
     val created: String
 
-): Response()
+): RestResponse()

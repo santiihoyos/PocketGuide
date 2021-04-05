@@ -44,7 +44,7 @@ internal interface RetrofitRickAndMortyRestRepository : RickAndMortyRestReposito
 
     @GET("character/{id}")
     @Headers(HEADER_ACCEPT_JSON, HEADER_CONTENT_TYPE_JSON)
-    override suspend fun getCharacterById(@Path("id") id: String): CharacterResponse?
+    override suspend fun getCharacterById(@Path("id") id: String): CharacterResponse
 
     //Add more Rick&Morty universe endpoints.
 }
