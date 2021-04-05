@@ -49,8 +49,6 @@ class CharacterDetailActivityTest {
         activityRule.launchActivity(Intent().apply {
             putExtras(CharacterDetailActivityArgs("1", "Rick Sanchez").toBundle())
         })
-
-
         onView(
             withId(R.id.characterDetailActivity_value_name)
         ).check(matches(withText("Rick Sanchez")))

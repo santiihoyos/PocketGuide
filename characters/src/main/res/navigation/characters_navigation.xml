@@ -9,11 +9,13 @@
         android:name="com.santiihoyos.characters.detail.view.CharacterDetailActivity"
         android:label="CharacterDetailActivity">
         <argument
-            android:name="CHARACTER_ID"
-            app:argType="string" />
+            android:name="characterId"
+            app:argType="string"
+            app:nullable="true" />
         <argument
-            android:name="CHARACTER_NAME"
-            app:argType="string" />
+            android:name="characterName"
+            app:argType="string"
+            app:nullable="true" />
     </activity>
     <fragment
         android:id="@+id/navigation_characterList"

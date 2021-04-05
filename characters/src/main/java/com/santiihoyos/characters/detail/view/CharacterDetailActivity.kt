@@ -4,6 +4,7 @@ import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
@@ -65,7 +66,7 @@ class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
 
         intent.extras?.let { _bundle ->
 
-            CharacterDetailActivityArgs.fromBundle(_bundle).CHARACTERID
+            CharacterDetailActivityArgs.fromBundle(_bundle).characterId
         }
     }
 
@@ -77,185 +78,201 @@ class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
         findViewById(R.id.characterDetailActivity_fav_AppCompatImageView)
     }
 
-        /**
-         * Character.id from Bundle
-         */
-        private var characterName: String? = null
+    /**
+     * Character.id from Bundle
+     */
+    private var characterName: String? = null
 
-        override fun inject() = CharactersComponent.instance.inject(this)
+    override fun inject() = CharactersComponent.instance.inject(this)
 
-        override fun getViewModelAbstract() = CharacterDetailViewModel::class.java
+    override fun getViewModelAbstract() = CharacterDetailViewModel::class.java
 
-        override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
 
-            super.onCreate(savedInstanceState)
-            setContentView(R.layout.activity_character_detail)
-            setupCharacterDetail()
-            setupToolbar("")
-            characterName = intent.extras?.let { _bundle -> CharacterDetailActivityArgs.fromBundle(_bundle).CHARACTERNAME }
-            favButton.setOnClickListener(::onFavButtonClick)
-        }
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_character_detail)
+        setupCharacterDetail()
+        setupToolbar("")
+        characterName = intent.extras?.let { _bundle -> CharacterDetailActivityArgs.fromBundle(_bundle).characterName }
+        favButton.setOnClickListener(::onFavButtonClick)
+    }
 
-        override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-            return when (item.itemId) {
-                android.R.id.home -> {
-                    finish()
-                    true
-                }
-                else -> super.onOptionsItemSelected(item)
+        return when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
             }
+            else -> super.onOptionsItemSelected(item)
         }
+    }
 
-        /**
-         * Paint Character instance returned from viewModel and refresh all data values.
-         * This function suspends into Main coroutine until viewModel getCharacter coroutine returns
-         * without block main thread :)
-         */
-        private fun setupCharacterDetail() = lifecycleScope.launch(Dispatchers.Main) {
+    /**
+     * Paint Character instance returned from viewModel and refresh all data values.
+     * This function suspends into Main coroutine until viewModel getCharacter coroutine returns
+     * without block main thread :)
+     */
+    private fun setupCharacterDetail() = lifecycleScope.launch(Dispatchers.Main) {
 
-            val characterIdFromBundle = characterId
-            if (characterIdFromBundle == null) {
+        val characterIdFromBundle = characterId
+        if (characterIdFromBundle == null) {
+
+            showErrorRetryDialog(R.string.characterDetailActivity_error_message)
+        } else {
+
+            loadingAppCompatTextView.text = getString(R.string.characterDetailActivity_loading, characterName)
+            loadingGroup.visible()
+            detailContainer.invisible()
+            val character = viewModel.getCharacter(characterIdFromBundle)
+            if (character == null) {
 
                 showErrorRetryDialog(R.string.characterDetailActivity_error_message)
             } else {
 
-                loadingAppCompatTextView.text = getString(R.string.characterDetailActivity_loading, characterName)
-                loadingGroup.visible()
-                detailContainer.invisible()
-                val character = viewModel.getCharacter(characterIdFromBundle)
-                if (character == null) {
-
-                    showErrorRetryDialog(R.string.characterDetailActivity_error_message)
-                } else {
-
-                    refreshDataValues(character)
-                }
-                detailContainer.visible()
-                loadingGroup.invisible()
+                refreshDataValues(character)
             }
+            detailContainer.visible()
+            loadingGroup.invisible()
         }
+    }
 
-        /**
-         * Refresh with incoming [Character] instance all view data values.
-         *
-         * @param character - Character entity to paint
-         */
-        private fun refreshDataValues(character: Character) {
+    /**
+     * Refresh with incoming [Character] instance all view data values.
+     *
+     * @param character - Character entity to paint
+     */
+    private fun refreshDataValues(character: Character) {
 
-            setupToolbar(character.name)
-            val photo = findViewById<AppCompatImageView>(R.id.characterDetailActivity_photo_AppCompatImageView)
-            val status = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_status)
-            val statusBullet = findViewById<AppCompatImageView>(R.id.characterDetailActivity_value_status_bullet)
-            val name = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_name)
-            val type = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_type)
-            val species = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_species)
-            val gender = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_gender)
-            val episodes = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_episodes)
-            val lastLoc = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_lastLocation)
-            photo.loadFromUrl(character.image, R.drawable.character_photo_placeholder)
-            name.text = character.name
-            status.text = character.status.name.toLowerCase(Locale.getDefault())
-            ImageViewCompat.setImageTintList(
-                statusBullet,
-                ColorStateList.valueOf(resolveStatusColor(character.status))
-            )
-            type.text = if (character.type.isEmpty()) "-" else character.type
-            species.text = character.species
-            gender.text = character.gender.name.toLowerCase(Locale.getDefault())
-            episodes.text = character.episode.joinToString(separator = ", ") {
-                it.substring(it.lastIndexOf("/") + 1)
-            }
-            lastLoc.text = character.location?.name ?: "-"
-            refreshFavButtonState(character.id)
-        }
-
-        /**
-         * Shows generic error retry dialog for character detail error on load
-         */
-        private fun showErrorRetryDialog(@StringRes messageResId: Int) = showGenericErrorRetryDialog(
-            message = messageResId,
-            onOkClickListener = ::onOkErrorDialogClick,
-            onCancelClickListener = ::onCancelErrorDialogClick
+        setupToolbar(character.name)
+        val photo = findViewById<AppCompatImageView>(R.id.characterDetailActivity_photo_AppCompatImageView)
+        val status = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_status)
+        val statusBullet = findViewById<AppCompatImageView>(R.id.characterDetailActivity_value_status_bullet)
+        val name = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_name)
+        val type = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_type)
+        val species = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_species)
+        val gender = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_gender)
+        val episodes = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_episodes)
+        val lastLoc = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_lastLocation)
+        photo.loadFromUrl(character.image, R.drawable.character_photo_placeholder)
+        name.text = character.name
+        status.text = character.status.name.toLowerCase(Locale.getDefault())
+        ImageViewCompat.setImageTintList(
+            statusBullet,
+            ColorStateList.valueOf(resolveStatusColor(character.status))
         )
-
-        /**
-         * Called when user taps into OK button into ErrorRetryDialog
-         */
-        private fun onOkErrorDialogClick() {
-
-            dismissDialog()
+        type.text = if (character.type.isEmpty()) "-" else character.type
+        species.text = character.species
+        gender.text = character.gender.name.toLowerCase(Locale.getDefault())
+        episodes.text = character.episode.joinToString(separator = ", ") {
+            it.substring(it.lastIndexOf("/") + 1)
         }
+        lastLoc.text = character.location?.name ?: "-"
+        refreshFavButtonState(character.id)
+    }
 
-        /**
-         * Called when user taps into CANCEL button into ErrorRetryDialog
-         */
-        private fun onCancelErrorDialogClick() {
+    /**
+     * Shows generic error retry dialog for character detail error on load
+     */
+    private fun showErrorRetryDialog(@StringRes messageResId: Int) = showGenericErrorRetryDialog(
+        message = messageResId,
+        onOkClickListener = ::onOkErrorDialogClick,
+        onCancelClickListener = ::onCancelErrorDialogClick
+    )
 
-            dismissDialog()
-        }
+    /**
+     * Called when user taps into OK button into ErrorRetryDialog
+     */
+    private fun onOkErrorDialogClick() {
 
-        /**
-         * Resolves status color
-         *
-         * @param status [Character.status]
-         * @return Int - Color as Int (not color res id)
-         */
-        private fun resolveStatusColor(status: Character.Status): Int {
-            return ContextCompat.getColor(
-                this,
-                when (status) {
-                    Character.Status.ALIVE -> R.color.characterDetail_status_alive
-                    Character.Status.DEAD -> R.color.characterDetail_status_dead
-                    Character.Status.UNKNOWN -> R.color.characterDetail_status_unknown
-                }
+        dismissDialog()
+    }
+
+    /**
+     * Called when user taps into CANCEL button into ErrorRetryDialog
+     */
+    private fun onCancelErrorDialogClick() {
+
+        dismissDialog()
+    }
+
+    /**
+     * Resolves status color
+     *
+     * @param status [Character.status]
+     * @return Int - Color as Int (not color res id)
+     */
+    private fun resolveStatusColor(status: Character.Status): Int {
+        return ContextCompat.getColor(
+            this,
+            when (status) {
+                Character.Status.ALIVE -> R.color.characterDetail_status_alive
+                Character.Status.DEAD -> R.color.characterDetail_status_dead
+                Character.Status.UNKNOWN -> R.color.characterDetail_status_unknown
+            }
+        )
+    }
+
+    /**
+     * Setups toolbar
+     *
+     * @param title - title (character name)
+     */
+    private fun setupToolbar(title: String) {
+
+        toolbar.title = title
+        toolbar.setTitleTextColor(ContextCompat.getColor(this, android.R.color.white))
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back_arrow)
+    }
+
+    /**
+     * setups fav buton
+     */
+    private fun refreshFavButtonState(characterId: String) {
+
+        lifecycleScope.launch(Dispatchers.IO) {
+
+            val isFavThisCharacter = viewModel.isUserCharacterFavorite(characterId)
+
+            favButton.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this@CharacterDetailActivity,
+                    if (isFavThisCharacter) R.drawable.ic_heart_filled else R.drawable.ic_heart_empty
+                )
             )
         }
+    }
 
-        /**
-         * Setups toolbar
-         *
-         * @param title - title (character name)
-         */
-        private fun setupToolbar(title: String) {
-
-            toolbar.title = title
-            toolbar.setTitleTextColor(ContextCompat.getColor(this, android.R.color.white))
-            setSupportActionBar(toolbar)
-            supportActionBar?.setDisplayShowHomeEnabled(true)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back_arrow)
-        }
-
-        /**
-         * setups fav buton
-         */
-        private fun refreshFavButtonState(characterId: String) {
-
-            lifecycleScope.launch(Dispatchers.IO) {
-
-                val isFavThisCharacter = viewModel.isUserCharacterFavorite(characterId)
-
-                favButton.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        this@CharacterDetailActivity,
-                        if (isFavThisCharacter) R.drawable.ic_heart_filled else R.drawable.ic_heart_empty
-                    )
-                )
-            }
-        }
-
+    /**
+     * Listener for click over fav button (heart)
+     */
+    @Suppress("UNUSED_PARAMETER")
     private fun onFavButtonClick(view: View) = characterId?.let { _characterId ->
 
         lifecycleScope.launch(Dispatchers.IO) {
 
-            val saved =  viewModel.saveAsFavorite(_characterId)
+            val saved = viewModel.saveAsFavorite(_characterId)
             if (!saved) {
 
                 showErrorRetryDialog(R.string.characterDetailActivity_error_save_fav_message)
             } else {
 
                 refreshFavButtonState(_characterId)
+
+                lifecycleScope.launch {
+
+                    Toast.makeText(
+                        this@CharacterDetailActivity,
+                        getString(
+                            R.string.characterDetailActivity_error_save_fav_message_ok,
+                            characterName ?: ""
+                        ),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
         }
     }

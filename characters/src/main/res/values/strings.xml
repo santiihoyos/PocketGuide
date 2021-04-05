@@ -10,6 +10,7 @@
     <!-- Character Detail -->
     <string name="characterDetailActivity_error_message">"Sorry, We have problems to get required Character. Please try again."</string>
     <string name="characterDetailActivity_error_save_fav_message">"Sorry, We have problems to save Character as favorite. Please try again."</string>
+    <string name="characterDetailActivity_error_save_fav_message_ok">"Whoala! %s is your new favorite character."</string>
     <string name="characterDetailActivity_loading">"Buscando a %s…"</string>
 
     <string name="characterDetailActivity_valueName_status">"Estado:"</string>
