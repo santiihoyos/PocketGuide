@@ -42,7 +42,8 @@ dependencies {
 
     //local modules dependencies
     implementation project(path: ':base')
-    implementation project(path: ':repository')
+    api project(path: ':api_rickAndMorty')
+    api project(path: ':api_keyvalue')
 
     //Dagger
     implementation dependencies.dagger

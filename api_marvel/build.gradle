@@ -1,0 +1,29 @@
+plugins {
+    id 'java-library'
+    id 'kotlin'
+    id 'kotlin-kapt'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+dependencies {
+
+    def dependencies = rootProject.ext.dependencies
+
+    api project(path: ':base_api')
+
+    //Kotlin
+    implementation dependencies.kotlinStdlib8
+
+    //Dagger
+    implementation dependencies.dagger
+    kapt dependencies.daggerCompiler
+
+    //Retrofit and its JSON converter (Jackson)
+    implementation dependencies.retrofit
+    implementation dependencies.retrofitConverter
+    implementation dependencies.retrofitAdapter
+}

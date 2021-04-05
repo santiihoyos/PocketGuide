@@ -3,7 +3,6 @@ package com.santiihoyos.marvelguide.di
 import android.app.Application
 import com.santiihoyos.characters.di.CharactersComponent
 import com.santiihoyos.marvelguide.MainActivity
-import com.santiihoyos.repository.di.RepositoryComponent
 import dagger.BindsInstance
 import dagger.Component
 
@@ -12,7 +11,6 @@ import dagger.Component
         AppModule::class
     ],
     dependencies = [
-        RepositoryComponent::class,
         CharactersComponent::class
     ]
 )
@@ -41,12 +39,10 @@ interface AppComponent {
 
             if (!this::instance.isInitialized) {
 
-                val dataComponent = RepositoryComponent.init(application)
-                val charactersComponent = CharactersComponent.init(application, dataComponent)
+                val charactersComponent = CharactersComponent.init(application)
 
                 instance = DaggerAppComponent.builder()
                     .application(application)
-                    .dataComponent(dataComponent)
                     .charactersComponent(charactersComponent)
                     .build()
             }
@@ -58,12 +54,10 @@ interface AppComponent {
     @Component.Builder
     interface Builder {
 
-        fun dataComponent(dataComponent: RepositoryComponent): Builder
-
-        fun charactersComponent(charactersComponent: CharactersComponent): Builder
-
         @BindsInstance
         fun application(application: Application): Builder
+
+        fun charactersComponent(charactersComponent: CharactersComponent): Builder
 
         fun build(): AppComponent
     }

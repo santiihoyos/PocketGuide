@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.santiihoyos.base.feature.abstracts.BaseViewModel
 import com.santiihoyos.base.di.ViewModelKey
 import com.santiihoyos.base.di.ViewModelProviderFactory
-import com.santiihoyos.base_repository.Mapper
+import com.santiihoyos.base_api.Mapper
 import com.santiihoyos.characters.detail.interactor.CharacterDetailInteractor
 import com.santiihoyos.characters.detail.interactor.CharacterDetailInteractorImpl
 import com.santiihoyos.characters.detail.viewModel.CharacterDetailViewModel
@@ -15,7 +15,7 @@ import com.santiihoyos.characters.list.interactor.CharacterListInteractor
 import com.santiihoyos.characters.list.viewmodel.CharacterListViewModel
 import com.santiihoyos.characters.list.viewmodel.CharacterListViewModelImpl
 import com.santiihoyos.characters.entity.mappers.CharacterMapper
-import com.santiihoyos.repositoryrickandmorty.response.CharacterResponse
+import com.santiihoyos.api_rickandmorty.response.CharacterResponse
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
