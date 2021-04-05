@@ -5,9 +5,9 @@ import com.santiihoyos.api_rickandmorty.usecase.GetCharactersPagingUseCase
 import dagger.Component
 
 @Component(
-    modules = [ApiRickAndMortyModule::class]
+    modules = [ApiRickAndMortyModule::class, ApiRickAndMortyBindsModule::class]
 )
-interface ApiRickAndMortyComponent{
+interface ApiRickAndMortyComponent {
 
     /**
      * Exposes to other components RestRepository implementation.

@@ -12,7 +12,7 @@ import javax.inject.Inject
 private const val SIZE_BY_PAGE = 20
 
 class CharacterListInteractorImpl @Inject constructor(
-    private val getCharactersPagingUseCase: GetCharactersPagingUseCase,
+    private val getCharactersPagingUseCaseImpl: GetCharactersPagingUseCase,
     private val characterMapper: Mapper<CharacterResponse, Character>
 ) : CharacterListInteractor() {
 
@@ -33,7 +33,7 @@ class CharacterListInteractorImpl @Inject constructor(
 
                 val pageSource = params.key ?: 1
                 return try {
-                    val response = getCharactersPagingUseCase.execute(pageSource)
+                    val response = getCharactersPagingUseCaseImpl.execute(pageSource)
                     return LoadResult.Page(
                         data = response.results.map(characterMapper::map),
                         prevKey = if (pageSource == 1) null else pageSource - 1,

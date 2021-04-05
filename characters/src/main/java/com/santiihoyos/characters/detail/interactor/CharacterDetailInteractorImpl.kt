@@ -11,9 +11,10 @@ import com.santiihoyos.base_api.usecase.UseCaseException
 import com.santiihoyos.characters.entity.Character
 import kotlinx.coroutines.delay
 import javax.inject.Inject
+import kotlin.jvm.Throws
 
 class CharacterDetailInteractorImpl @Inject constructor(
-    private val getCharacterByIdUseCase: GetCharacterByIdUseCase,
+    private val getCharacterByIdUseCaseImpl: GetCharacterByIdUseCase,
     private val keyValueRepository: KeyValueRepository,
     private val characterMapper: Mapper<CharacterResponse, Character>
 ) : CharacterDetailInteractor() {
@@ -25,7 +26,7 @@ class CharacterDetailInteractorImpl @Inject constructor(
 
         try {
 
-            val characterResponse = getCharacterByIdUseCase.execute(id)
+            val characterResponse = getCharacterByIdUseCaseImpl.execute(id)
             return characterMapper.map(characterResponse)
 
         } catch (ex: UseCaseException) {
