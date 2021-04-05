@@ -68,8 +68,6 @@ dependencies {
 
     //features
     implementation project(path: ':base')
-    implementation project(path: ':settings')
-    implementation project(path: ':repository')
 
     //For Paradigma Code challenge feature for RickAndMorty
     rickAndMortyImplementation project(path: ':characters')

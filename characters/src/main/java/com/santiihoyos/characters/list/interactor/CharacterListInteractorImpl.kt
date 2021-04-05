@@ -1,10 +1,10 @@
 package com.santiihoyos.characters.list.interactor
 
 import androidx.paging.*
-import com.santiihoyos.base_repository.Mapper
+import com.santiihoyos.api_rickandmorty.response.CharacterResponse
+import com.santiihoyos.api_rickandmorty.usecase.GetCharactersPagingUseCase
 import com.santiihoyos.characters.entity.Character
-import com.santiihoyos.repositoryrickandmorty.RickAndMortyRestRepository
-import com.santiihoyos.repositoryrickandmorty.response.CharacterResponse
+import com.santiihoyos.base_api.Mapper
 import kotlinx.coroutines.flow.Flow
 import java.lang.Exception
 import javax.inject.Inject
@@ -12,7 +12,7 @@ import javax.inject.Inject
 private const val SIZE_BY_PAGE = 20
 
 class CharacterListInteractorImpl @Inject constructor(
-    private val rickAndMortyRestRepository: RickAndMortyRestRepository,
+    private val getCharactersPagingUseCase: GetCharactersPagingUseCase,
     private val characterMapper: Mapper<CharacterResponse, Character>
 ) : CharacterListInteractor() {
 
@@ -33,11 +33,17 @@ class CharacterListInteractorImpl @Inject constructor(
 
                 val pageSource = params.key ?: 1
                 return try {
-                    val charactersResponse = rickAndMortyRestRepository.getCharactersAtPage(pageSource)
+                    val (httpStatusCode, response, errorMessage) = getCharactersPagingUseCase.execute(pageSource)
+
+                    if (httpStatusCode != 200) {
+
+                        return LoadResult.Error(Exception(errorMessage))
+                    }
+
                     return LoadResult.Page(
-                        data = charactersResponse.results.map(characterMapper::map),
+                        data = response?.results?.map(characterMapper::map) ?: emptyList(),
                         prevKey = if (pageSource == 1) null else pageSource - 1,
-                        nextKey = if (charactersResponse.results.isEmpty()) null else pageSource + 1
+                        nextKey = if (response?.results.isNullOrEmpty()) null else pageSource + 1
                     )
                 } catch (ex: Exception) {
 

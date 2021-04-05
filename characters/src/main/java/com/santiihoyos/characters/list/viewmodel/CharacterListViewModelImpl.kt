@@ -13,6 +13,7 @@ class CharacterListViewModelImpl @Inject constructor(
 ) : CharacterListViewModel() {
 
     override var currentCharactersResult: Flow<PagingData<Character>>? = null
+        private set
 
     override suspend fun loadNextCharacters(): Flow<PagingData<Character>> {
 

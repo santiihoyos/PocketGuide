@@ -1,9 +1,10 @@
 package com.santiihoyos.characters.di
 
 import android.app.Application
+import com.santiihoyos.api_keyvalue.di.ApiKeyValueComponent
+import com.santiihoyos.api_rickandmorty.di.ApiRickAndMortyComponent
 import com.santiihoyos.characters.detail.view.CharacterDetailActivity
 import com.santiihoyos.characters.list.view.CharacterListFragment
-import com.santiihoyos.repository.di.RepositoryComponent
 import dagger.BindsInstance
 import dagger.Component
 
@@ -13,7 +14,8 @@ import dagger.Component
         CharactersModule::class
     ],
     dependencies = [
-        RepositoryComponent::class
+        ApiRickAndMortyComponent::class,
+        ApiKeyValueComponent::class
     ]
 )
 interface CharactersComponent {
@@ -32,15 +34,15 @@ interface CharactersComponent {
          * @return DataComponent implementation
          */
         fun init(
-            application: Application,
-            dataComponent: RepositoryComponent
+            application: Application
         ): CharactersComponent {
 
             if (!this::instance.isInitialized) {
 
                 instance = DaggerCharactersComponent.builder()
                     .application(application)
-                    .dataComponent(dataComponent)
+                    .apiRickAndMortyComponent(ApiRickAndMortyComponent.init())
+                    .apiKeyValueComponent(ApiKeyValueComponent.init(application))
                     .build()
             }
 
@@ -54,7 +56,9 @@ interface CharactersComponent {
         @BindsInstance
         fun application(application: Application): Builder
 
-        fun dataComponent(dataComponent: RepositoryComponent): Builder
+        fun apiRickAndMortyComponent(dataComponent: ApiRickAndMortyComponent): Builder
+
+        fun apiKeyValueComponent(apiKeyValueComponent: ApiKeyValueComponent): Builder
 
         fun build(): CharactersComponent
     }

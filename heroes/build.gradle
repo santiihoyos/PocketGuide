@@ -42,7 +42,8 @@ dependencies {
 
     //local modules dependencies
     implementation project(path: ':base')
-    implementation project(path: ':repository')
+
+    api project(path: ':api_marvel')
 
     //Dagger
     implementation dependencies.dagger

@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.santiihoyos.base.feature.abstracts.BaseFragment
-import com.santiihoyos.characters.di.HeroesComponent
+import com.santiihoyos.heroes.di.HeroesComponent
 import com.santiihoyos.heroes.R
 import com.santiihoyos.heroes.list.viewmodel.HeroListViewModel
 import javax.inject.Inject

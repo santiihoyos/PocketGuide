@@ -1,10 +1,8 @@
-package com.santiihoyos.characters.di
+package com.santiihoyos.heroes.di
 
 import android.app.Application
-import com.santiihoyos.heroes.di.HeroesBindsModule
-import com.santiihoyos.heroes.di.HeroesModule
+import com.santiihoyos.api_marvel.di.ApiMarvelComponent
 import com.santiihoyos.heroes.list.view.HeroListFragment
-import com.santiihoyos.repository.di.RepositoryComponent
 import dagger.BindsInstance
 import dagger.Component
 
@@ -14,14 +12,12 @@ import dagger.Component
         HeroesModule::class
     ],
     dependencies = [
-        RepositoryComponent::class
+        ApiMarvelComponent::class
     ]
 )
 interface HeroesComponent {
 
     fun inject(heroListFragment: HeroListFragment)
-
-    //fun inject(characterListActivity: CharacterDetailActivity)
 
     companion object {
 
@@ -33,15 +29,14 @@ interface HeroesComponent {
          * @return DataComponent implementation
          */
         fun init(
-            application: Application,
-            dataComponent: RepositoryComponent
+            application: Application
         ): HeroesComponent {
 
             if (!this::instance.isInitialized) {
 
                 instance = DaggerHeroesComponent.builder()
                     .application(application)
-                    .dataComponent(dataComponent)
+                    .apiMarvelComponent(ApiMarvelComponent.init())
                     .build()
             }
 
@@ -55,7 +50,7 @@ interface HeroesComponent {
         @BindsInstance
         fun application(application: Application): Builder
 
-        fun dataComponent(dataComponent: RepositoryComponent): Builder
+        fun apiMarvelComponent(apiMarvelComponent: ApiMarvelComponent): Builder
 
         fun build(): HeroesComponent
     }
