@@ -1,6 +1,6 @@
 package com.santiihoyos.api_keyvalue.di
 
-import android.app.Application
+import android.content.Context
 import com.santiihoyos.base_api.repository.KeyValueRepository
 import dagger.BindsInstance
 import dagger.Component
@@ -27,13 +27,13 @@ interface ApiKeyValueComponent{
          * @return DataComponent implementation
          */
         fun init(
-            application: Application
+            context: Context
         ): ApiKeyValueComponent {
 
             if (!this::instance.isInitialized) {
 
                 instance = DaggerApiKeyValueComponent.builder()
-                    .application(application)
+                    .context(context)
                     .build()
             }
 
@@ -45,7 +45,7 @@ interface ApiKeyValueComponent{
     interface Builder {
 
         @BindsInstance
-        fun application(application: Application): Builder
+        fun context(context: Context): Builder
 
         fun build(): ApiKeyValueComponent
     }

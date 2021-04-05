@@ -5,6 +5,7 @@ import androidx.paging.PagingData
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import com.santiihoyos.characters.entity.Character
+import com.santiihoyos.characters.entity.Location
 import com.santiihoyos.characters.list.interactor.CharacterListInteractor
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.BroadcastChannel
@@ -22,10 +23,10 @@ import org.junit.runners.JUnit4
 class CharacterListViewModelImplTest {
 
     private val charactersMock = listOf(
-        Character("1", "Rick", Character.Status.ALIVE, "", "", Character.Gender.MALE, "", "", "", listOf("1", "2")),
-        Character("2", "Beth", Character.Status.ALIVE, "", "", Character.Gender.FEMALE, "", "", "", listOf("1", "2")),
-        Character("3", "Morty", Character.Status.ALIVE, "", "", Character.Gender.MALE, "", "", "", listOf("1", "2")),
-        Character("4", "Summer", Character.Status.ALIVE, "", "", Character.Gender.FEMALE, "", "", "", listOf("1", "2")),
+        Character("1", "Rick", Character.Status.ALIVE, "", "", Character.Gender.MALE, "", Location(0,""), "", listOf("1", "2")),
+        Character("2", "Beth", Character.Status.ALIVE, "", "", Character.Gender.FEMALE, "", Location(0,""), "", listOf("1", "2")),
+        Character("3", "Morty", Character.Status.ALIVE, "", "", Character.Gender.MALE, "", Location(0,""), "", listOf("1", "2")),
+        Character("4", "Summer", Character.Status.ALIVE, "", "", Character.Gender.FEMALE, "", Location(0,""), "", listOf("1", "2")),
     )
 
     /**

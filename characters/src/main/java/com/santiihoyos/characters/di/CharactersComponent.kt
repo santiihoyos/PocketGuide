@@ -1,6 +1,7 @@
 package com.santiihoyos.characters.di
 
 import android.app.Application
+import android.content.Context
 import com.santiihoyos.api_keyvalue.di.ApiKeyValueComponent
 import com.santiihoyos.api_rickandmorty.di.ApiRickAndMortyComponent
 import com.santiihoyos.characters.detail.view.CharacterDetailActivity
@@ -34,15 +35,15 @@ interface CharactersComponent {
          * @return DataComponent implementation
          */
         fun init(
-            application: Application
+            context: Context
         ): CharactersComponent {
 
             if (!this::instance.isInitialized) {
 
                 instance = DaggerCharactersComponent.builder()
-                    .application(application)
+                    .application(context)
                     .apiRickAndMortyComponent(ApiRickAndMortyComponent.init())
-                    .apiKeyValueComponent(ApiKeyValueComponent.init(application))
+                    .apiKeyValueComponent(ApiKeyValueComponent.init(context))
                     .build()
             }
 
@@ -54,7 +55,7 @@ interface CharactersComponent {
     interface Builder {
 
         @BindsInstance
-        fun application(application: Application): Builder
+        fun application(context: Context): Builder
 
         fun apiRickAndMortyComponent(dataComponent: ApiRickAndMortyComponent): Builder
 

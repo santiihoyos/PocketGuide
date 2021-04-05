@@ -1,6 +1,5 @@
 package com.santiihoyos.api_keyvalue.di
 
-import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import com.santiihoyos.api_keyvalue.SharedPreferencesKeyValueRepository
@@ -27,9 +26,9 @@ internal object ApiKeyValueModule {
      *  @return SharedPreferences implementation
      */
     @Provides
-    fun providesSharedPreferences(application: Application): SharedPreferences {
+    fun providesSharedPreferences(context: Context): SharedPreferences {
 
-        return application.applicationContext.getSharedPreferences(
+        return context.applicationContext.getSharedPreferences(
             DEFAULT_PREFERENCES_NAME, Context.MODE_PRIVATE
         )
     }
