@@ -9,7 +9,7 @@ internal class RickAndMortyMockRestRepository: RickAndMortyRestRepository {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getCharacterById(id: String): CharacterResponse? {
+    override suspend fun getCharacterById(id: String): CharacterResponse {
         TODO("Not yet implemented")
     }
 }

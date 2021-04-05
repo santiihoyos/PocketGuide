@@ -1,5 +1,6 @@
 package com.santiihoyos.api_rickandmorty.di
 
+import com.santiihoyos.api_rickandmorty.usecase.GetCharacterByIdUseCase
 import com.santiihoyos.api_rickandmorty.usecase.GetCharactersPagingUseCase
 import dagger.Component
 
@@ -13,7 +14,9 @@ interface ApiRickAndMortyComponent{
      *
      * @return RestRepository implementation
      */
-    fun getRestRepository(): GetCharactersPagingUseCase
+    fun getCharactersPagingUseCase(): GetCharactersPagingUseCase
+
+    fun getCharacterByIdUseCase(): GetCharacterByIdUseCase
 
     companion object {
 

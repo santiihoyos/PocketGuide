@@ -1,6 +1,6 @@
 package com.santiihoyos.api_marvel.response
 
-import com.santiihoyos.base_api.response.Response
+import com.santiihoyos.base_api.response.RestResponse
 
 /**
  * Characters LIST response
@@ -17,7 +17,7 @@ data class HeroesResponse(
      */
     val results: List<HeroResponse>,
 
-    ) : Response() {
+    ) : RestResponse() {
 
     /**
      * Entity for Info response
