@@ -10,8 +10,6 @@ import kotlinx.coroutines.flow.Flow
  */
 abstract class CharacterListViewModel: BaseViewModel() {
 
-    abstract val currentCharactersResult: Flow<PagingData<Character>>?
-
     /**
      * Load or reload list of characters from new page.
      */
