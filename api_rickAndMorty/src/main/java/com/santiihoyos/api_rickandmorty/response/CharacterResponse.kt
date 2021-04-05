@@ -42,7 +42,7 @@ data class CharacterResponse(
     /**
      * Name and link to the character's last known location endpoint.
      */
-    val location: Any,
+    val location: LocationResponse?,
 
     /**
      * String (url)	Link to the character's image.

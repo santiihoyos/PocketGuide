@@ -18,4 +18,5 @@
     <string name="characterDetailActivity_valueName_type">"Tipo:"</string>
     <string name="characterDetailActivity_valueName_gender">"Género:"</string>
     <string name="characterDetailActivity_valueName_episodes">"Capitulos:"</string>
+    <string name="characterDetailActivity_valueName_lasLocation">"Última loc.:"</string>
 </resources>

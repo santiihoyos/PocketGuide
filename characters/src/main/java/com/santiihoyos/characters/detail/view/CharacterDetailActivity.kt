@@ -27,7 +27,6 @@ import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
-
 class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
 
     @Inject
@@ -153,6 +152,7 @@ class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
             val species = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_species)
             val gender = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_gender)
             val episodes = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_episodes)
+            val lastLoc = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_lastLocation)
             photo.loadFromUrl(character.image, R.drawable.character_photo_placeholder)
             name.text = character.name
             status.text = character.status.name.toLowerCase(Locale.getDefault())
@@ -166,7 +166,7 @@ class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
             episodes.text = character.episode.joinToString(separator = ", ") {
                 it.substring(it.lastIndexOf("/") + 1)
             }
-
+            lastLoc.text = character.location?.name ?: "-"
             refreshFavButtonState(character.id)
         }
 

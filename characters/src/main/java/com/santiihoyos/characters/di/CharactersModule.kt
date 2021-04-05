@@ -16,6 +16,9 @@ import com.santiihoyos.characters.list.viewmodel.CharacterListViewModel
 import com.santiihoyos.characters.list.viewmodel.CharacterListViewModelImpl
 import com.santiihoyos.characters.entity.mappers.CharacterMapper
 import com.santiihoyos.api_rickandmorty.response.CharacterResponse
+import com.santiihoyos.api_rickandmorty.response.LocationResponse
+import com.santiihoyos.characters.entity.Location
+import com.santiihoyos.characters.entity.mappers.LocationMapper
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -53,6 +56,11 @@ abstract class CharactersBindsModule {
     abstract fun bindCharacterMapper(
         characterMapper: CharacterMapper
     ): Mapper<CharacterResponse, Character>
+
+    @Binds
+    abstract fun bindLocationMapper(
+        characterMapper: LocationMapper
+    ): Mapper<LocationResponse, Location>
 }
 
 @Module

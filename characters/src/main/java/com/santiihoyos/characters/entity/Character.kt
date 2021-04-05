@@ -44,7 +44,7 @@ data class Character(
     /**
      * Name and link to the character's last known location endpoint.
      */
-    val location: Any,
+    val location: Location?,
 
     /**
      * String (url)	Link to the character's image.
