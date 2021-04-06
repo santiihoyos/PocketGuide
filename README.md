@@ -53,7 +53,7 @@ Es un modulo que abstrae el concepto de guardar mediante pares clave valor media
 ### :characters
 Contiene las abstraciones de los casos de uso y sus implementaciones implementa un listado de characters y un pequeño detella donde se puede marcar a un personaje como favorito.
 
-### :characters
+### :heroes
 En implementación y será parecido a :characters pero para la api de marvel.
 
 ### :app
