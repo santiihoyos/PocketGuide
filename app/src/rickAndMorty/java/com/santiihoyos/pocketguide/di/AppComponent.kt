@@ -1,14 +1,17 @@
-package com.santiihoyos.marvelguide.di
+package com.santiihoyos.pocketguide.di
 
 import android.app.Application
 import com.santiihoyos.characters.di.CharactersComponent
-import com.santiihoyos.marvelguide.MainActivity
+import com.santiihoyos.pocketguide.di.DaggerAppComponent
+import com.santiihoyos.pocketguide.main.view.MainActivity
+import com.santiihoyos.pocketguide.dummy.view.DummyFragment
 import dagger.BindsInstance
 import dagger.Component
 
 @Component(
     modules = [
-        AppModule::class
+        AppModule::class,
+        AppModuleBinds::class
     ],
     dependencies = [
         CharactersComponent::class
@@ -22,6 +25,13 @@ interface AppComponent {
      * @param mainActivity - MainActivity instance to inject
      */
     fun inject(mainActivity: MainActivity)
+
+    /**
+     * Injects Dummy fragment
+     *
+     * @param dummyFragment - DummyFragment instance to inject
+     */
+    fun inject(dummyFragment: DummyFragment)
 
     companion object {
 

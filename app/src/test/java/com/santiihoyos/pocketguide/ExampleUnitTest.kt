@@ -1,4 +1,4 @@
-package com.santiihoyos.marvelguide
+package com.santiihoyos.pocketguide
 
 import org.junit.Test
 

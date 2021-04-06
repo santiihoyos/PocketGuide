@@ -1,12 +1,27 @@
-package com.santiihoyos.marvelguide
+package com.santiihoyos.pocketguide.main.view
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.santiihoyos.base.feature.abstracts.BaseActivity
+import com.santiihoyos.marvelguide.R
+import com.santiihoyos.pocketguide.di.AppComponent
+import com.santiihoyos.pocketguide.main.viewmodel.MainViewModel
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+/**
+ * App entry point
+ */
+class MainActivity : BaseActivity<MainViewModel>() {
+
+    @Inject
+    override lateinit var viewModelProviderFactory: ViewModelProvider.Factory
+
+    override fun inject() = AppComponent.instance.inject(this)
+
+    override fun getViewModelAbstract(): Class<MainViewModel> = MainViewModel::class.java
 
     override fun onCreate(savedInstanceState: Bundle?) {
 

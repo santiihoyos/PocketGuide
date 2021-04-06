@@ -11,13 +11,13 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.santiihoyos.marvelguide.ui.home.HomeFragment"
+        android:name="com.santiihoyos.pocketguide.dummy.view.DummyFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.santiihoyos.marvelguide.ui.dashboard.DashboardFragment"
+        android:name="com.santiihoyos.pocketguide.dummy.view.DummyFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 </navigation>

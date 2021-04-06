@@ -1,7 +1,7 @@
-package com.santiihoyos.marvelguide
+package com.santiihoyos.pocketguide
 
 import android.app.Application
-import com.santiihoyos.marvelguide.di.AppComponent
+import com.santiihoyos.pocketguide.di.AppComponent
 
 class AppApplication : Application() {
 

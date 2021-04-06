@@ -6,7 +6,7 @@
     <uses-permission-sdk-23 android:name="android.permission.INTERNET"/>
 
     <application
-        android:name=".AppApplication"
+        android:name="com.santiihoyos.pocketguide.AppApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -14,7 +14,7 @@
         android:theme="@style/Theme.PocketGuide">
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.santiihoyos.pocketguide.main.view.MainActivity"
             android:label="@string/app_name">
 
             <intent-filter>
