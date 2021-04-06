@@ -58,3 +58,6 @@ En implementación y será parecido a :characters pero para la api de marvel.
 
 ### :app
 Módulo de entrada a la app, además contiene un Fragment dummy para rellenar el nav y el Main ambos como la misma estructura que el resto de la app.
+
+## Tests
+A modo de ejemplo he añadido 3 test sobre 3 disitntas caps de la app sobre el interactor(CharacterDetailInteractorImpl) y view model(CharacterDetailViewModelIImpl) y sobre la vista (CharacterDetailActivityTest) en el modulo :characters
