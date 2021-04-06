@@ -22,7 +22,7 @@ Este repositorio contiene la aplicación Android "PocketGuide" esta aplicación 
  - Navigaton (Android JetPack)
  - ViewModel (Android JetPack)
  - LiveData  (Android JetPack)
- - Picasso   (Android JetPack)
+ - Picasso
  - Mockito
  - Espresso
  - etc...
