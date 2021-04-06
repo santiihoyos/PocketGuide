@@ -14,7 +14,8 @@ Este repositorio contiene la aplicación Android "PocketGuide" esta aplicación 
 ## Resumen de la arquitectura (MVVM)
 
 ### Grafico de MVVM
-![arquitectura](https://user-images.githubusercontent.com/10730150/113636910-b363ce00-9673-11eb-971e-39b28508b65f.jpg)
+![arquitectura](https://user-images.githubusercontent.com/10730150/113680141-d6689f00-96c0-11eb-979d-a0aed945d296.jpg)
+
 
 
 ### Libraries
@@ -22,7 +23,8 @@ Este repositorio contiene la aplicación Android "PocketGuide" esta aplicación 
  - Navigaton (Android JetPack)
  - ViewModel (Android JetPack)
  - LiveData  (Android JetPack)
- - Picasso   (Android JetPack)
+ - Paging3   (Android JetPack)
+ - Picasso
  - Mockito
  - Espresso
  - etc...
@@ -53,8 +55,11 @@ Es un modulo que abstrae el concepto de guardar mediante pares clave valor media
 ### :characters
 Contiene las abstraciones de los casos de uso y sus implementaciones implementa un listado de characters y un pequeño detella donde se puede marcar a un personaje como favorito.
 
-### :characters
+### :heroes
 En implementación y será parecido a :characters pero para la api de marvel.
 
 ### :app
 Módulo de entrada a la app, además contiene un Fragment dummy para rellenar el nav y el Main ambos como la misma estructura que el resto de la app.
+
+## Tests
+A modo de ejemplo he añadido 3 test sobre 3 disitntas caps de la app sobre el interactor(CharacterDetailInteractorImpl) y view model(CharacterDetailViewModelIImpl) y sobre la vista (CharacterDetailActivityTest) en el modulo :characters
