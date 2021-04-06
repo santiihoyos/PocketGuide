@@ -14,7 +14,8 @@ Este repositorio contiene la aplicación Android "PocketGuide" esta aplicación 
 ## Resumen de la arquitectura (MVVM)
 
 ### Grafico de MVVM
-![arquitectura](https://user-images.githubusercontent.com/10730150/113636910-b363ce00-9673-11eb-971e-39b28508b65f.jpg)
+![arquitectura](https://user-images.githubusercontent.com/10730150/113680141-d6689f00-96c0-11eb-979d-a0aed945d296.jpg)
+
 
 
 ### Libraries
