@@ -1,4 +1,5 @@
 buildscript {
+
     apply from: 'dependencies.gradle'
     repositories {
         jcenter()
@@ -10,26 +11,17 @@ buildscript {
     }
     dependencies {
         classpath "${classPath.buildGradle}"
-        classpath "${classPath.gradleRetroLambda}"
-        classpath "${classPath.retroLambda}"
-        classpath "${classPath.firebaseCrashlyticsGradle}"
-        classpath "${classPath.googleServices}"
         classpath "${classPath.kotlinGradle}"
-
-        def nav_version = "2.3.4"
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+        classpath "${classPath.navigation}"
     }
 
     configurations.classpath.exclude group: 'com.android.tools.external.lombok'
-
 }
 
 allprojects {
+
     repositories {
         jcenter()
-        maven {
-            url "https://maven.google.com"
-        }
         mavenCentral()
         google()
         flatDir {

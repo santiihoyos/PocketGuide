@@ -13,16 +13,12 @@ dependencies {
 
     def dependencies = rootProject.ext.dependencies
 
-    api project(path: ':base_api')
-
-    //Kotlin
-    implementation dependencies.kotlinStdlib8
+    api project(path: dependencies.moduleBaseApi)
 
     //Dagger
-    implementation dependencies.dagger
     kapt dependencies.daggerCompiler
 
-    //Retrofit and its JSON converter (Jackson)
+    //Retrofit
     implementation dependencies.retrofit
     implementation dependencies.retrofitConverter
     implementation dependencies.retrofitAdapter
