@@ -15,11 +15,7 @@ dependencies {
 
     api project(path: ':base_api')
 
-    //Kotlin
-    implementation dependencies.kotlinStdlib8
-
     //Dagger
-    implementation dependencies.dagger
     kapt dependencies.daggerCompiler
 
     //Retrofit and its JSON converter (Jackson)

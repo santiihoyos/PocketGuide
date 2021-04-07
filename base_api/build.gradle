@@ -10,5 +10,8 @@ java {
 
 dependencies {
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    def dependencies = rootProject.ext.dependencies
+
+    api dependencies.kotlin
+    api dependencies.dagger
 }

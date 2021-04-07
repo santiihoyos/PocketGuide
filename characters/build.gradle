@@ -45,14 +45,15 @@ dependencies {
 
     //local modules dependencies
     implementation project(path: ':base')
-    api project(path: ':api_rickAndMorty')
-    api project(path: ':api_keyvalue')
+
+    api project(path: dependencies.moduleApiRickAndMorty)
+    api project(path: dependencies.moduleApiKeyValue)
 
     //Dagger
     implementation dependencies.dagger
     kapt dependencies.daggerCompiler
 
-    implementation dependencies.kotlinStdlib8
+    implementation dependencies.kotlin
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0'

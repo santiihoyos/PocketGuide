@@ -49,9 +49,8 @@ android {
 dependencies {
     def dependencies = rootProject.ext.dependencies
 
-    implementation project(path: ':base_api')
+    implementation project(path: dependencies.moduleBaseApi)
 
     //Dagger
-    implementation dependencies.dagger
     kapt dependencies.daggerCompiler
 }
