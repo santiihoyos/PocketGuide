@@ -18,7 +18,7 @@ dependencies {
     //Dagger
     kapt dependencies.daggerCompiler
 
-    //Retrofit and its JSON converter (Jackson)
+    //Retrofit
     implementation dependencies.retrofit
     implementation dependencies.retrofitConverter
     implementation dependencies.retrofitAdapter

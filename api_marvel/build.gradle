@@ -13,12 +13,12 @@ dependencies {
 
     def dependencies = rootProject.ext.dependencies
 
-    api project(path: ':base_api')
+    api project(path: dependencies.moduleBaseApi)
 
     //Dagger
     kapt dependencies.daggerCompiler
 
-    //Retrofit and its JSON converter (Jackson)
+    //Retrofit
     implementation dependencies.retrofit
     implementation dependencies.retrofitConverter
     implementation dependencies.retrofitAdapter
