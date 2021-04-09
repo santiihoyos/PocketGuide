@@ -23,7 +23,7 @@
 -keep class androidx.navigation.fragment.NavHostFragment
 
 # Retrofit + Gson
--keep class com.santiihoyos.api_rickandmorty.response.** { *; }
+-keep class com.santiihoyos.api_rickandmorty.request.** { *; }
 -keep class com.santiihoyos.api_rickandmorty.response.** { *; }
 
 ##retrofit2

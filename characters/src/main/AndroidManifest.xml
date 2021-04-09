@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.santiihoyos.characters">
 
-
-
     <application>
-
         <activity
             android:exported="false"
             android:theme="@style/Theme.PocketGuide"
             android:name=".detail.view.CharacterDetailActivity"/>
 
-        <uses-library android:name="android.test.runner"
-            android:required="false" />
-
+        <uses-library android:name="android.test.runner" android:required="false" />
 
     </application>
-
 </manifest>
