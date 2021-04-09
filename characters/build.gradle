@@ -41,6 +41,7 @@ android {
 }
 
 dependencies {
+
     def dependencies = rootProject.ext.dependencies
     def testDependencies = rootProject.ext.testDependencies
 
@@ -59,4 +60,17 @@ dependencies {
     testImplementation testDependencies.coroutinesTest
 
 
+    // UI tests with Android Espresso and Android Test runner
+    androidTestImplementation testDependencies.espressoCore
+    androidTestImplementation testDependencies.espressoContrib
+    androidTestImplementation testDependencies.espressoIntents
+    androidTestImplementation testDependencies.espressoIdlingConcurrent
+    androidTestImplementation testDependencies.espressoIdlingResource
+
+    androidTestImplementation testDependencies.androidxTestJunitExt
+    androidTestImplementation testDependencies.androidxTestTruthExt
+    androidTestImplementation testDependencies.googleTruth
+
+    androidTestImplementation testDependencies.androidxTestRunner
+    androidTestImplementation testDependencies.androidxTestRules
 }

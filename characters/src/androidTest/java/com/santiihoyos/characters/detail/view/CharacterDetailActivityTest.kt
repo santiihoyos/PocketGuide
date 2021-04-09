@@ -9,6 +9,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
+import androidx.test.rule.GrantPermissionRule
 import androidx.test.runner.intercepting.SingleActivityFactory
 import com.santiihoyos.api_keyvalue.di.DaggerApiKeyValueComponent
 import com.santiihoyos.api_rickandmorty.di.DaggerApiRickAndMortyComponent
@@ -42,6 +43,8 @@ class CharacterDetailActivityTest {
 
     @get:Rule
     var activityRule = ActivityTestRule(injectedFactory, false, true)
+
+    @get:Rule var permissionRule = GrantPermissionRule.grant(android.Manifest.permission.INTERNET)
 
     @Test
     fun testCharacterNameIsOkShowedToUser() {
