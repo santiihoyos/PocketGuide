@@ -1,24 +1,21 @@
 package com.santiihoyos.characters.di
 
 import androidx.lifecycle.ViewModelProvider
+import com.santiihoyos.api_marvel.response.CharacterResponse
 import com.santiihoyos.base.feature.abstracts.BaseViewModel
 import com.santiihoyos.base.di.ViewModelKey
 import com.santiihoyos.base.di.ViewModelProviderFactory
-import com.santiihoyos.base_api.Mapper
 import com.santiihoyos.characters.detail.interactor.CharacterDetailInteractor
 import com.santiihoyos.characters.detail.interactor.CharacterDetailInteractorImpl
 import com.santiihoyos.characters.detail.viewModel.CharacterDetailViewModel
 import com.santiihoyos.characters.detail.viewModel.CharacterDetailViewModelImpl
-import com.santiihoyos.characters.entity.Character
 import com.santiihoyos.characters.list.interactor.CharacterListInteractorImpl
 import com.santiihoyos.characters.list.interactor.CharacterListInteractor
 import com.santiihoyos.characters.list.viewmodel.CharacterListViewModel
 import com.santiihoyos.characters.list.viewmodel.CharacterListViewModelImpl
 import com.santiihoyos.characters.entity.mappers.CharacterMapper
-import com.santiihoyos.api_rickandmorty.response.CharacterResponse
-import com.santiihoyos.api_rickandmorty.response.LocationResponse
-import com.santiihoyos.characters.entity.Location
-import com.santiihoyos.characters.entity.mappers.LocationMapper
+import com.santiihoyos.characters.list.view.adapter.CharacterRecyclerViewAdapter
+import com.santiihoyos.characters.list.view.adapter.CharacterRecyclerViewAdapterImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -53,14 +50,9 @@ abstract class CharactersBindsModule {
     ): CharacterDetailInteractor
 
     @Binds
-    abstract fun bindCharacterMapper(
-        characterMapper: CharacterMapper
-    ): Mapper<CharacterResponse, Character>
-
-    @Binds
-    abstract fun bindLocationMapper(
-        characterMapper: LocationMapper
-    ): Mapper<LocationResponse, Location>
+    abstract fun bindCharacterRecyclerViewAdapter(
+        characterRecyclerViewAdapter: CharacterRecyclerViewAdapterImpl
+    ): CharacterRecyclerViewAdapter
 }
 
 @Module

@@ -1,6 +1,5 @@
 package com.santiihoyos.characters.detail.view
 
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -12,12 +11,10 @@ import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.Group
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
-import androidx.core.widget.ImageViewCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.santiihoyos.base.feature.abstracts.BaseActivity
 import com.santiihoyos.base.extensions.invisible
-import com.santiihoyos.base.extensions.loadFromUrl
 import com.santiihoyos.base.extensions.visible
 import com.santiihoyos.characters.R
 import com.santiihoyos.characters.detail.viewModel.CharacterDetailViewModel
@@ -144,31 +141,10 @@ class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
      */
     private fun refreshDataValues(character: Character) {
 
-        setupToolbar(character.name)
-        val photo = findViewById<AppCompatImageView>(R.id.characterDetailActivity_photo_AppCompatImageView)
-        val status = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_status)
-        val statusBullet = findViewById<AppCompatImageView>(R.id.characterDetailActivity_value_status_bullet)
+        setupToolbar(character.name ?: "")
         val name = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_name)
-        val type = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_type)
-        val species = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_species)
-        val gender = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_gender)
-        val episodes = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_episodes)
-        val lastLoc = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_lastLocation)
-        photo.loadFromUrl(character.image, R.drawable.character_photo_placeholder)
         name.text = character.name
-        status.text = character.status.name.toLowerCase(Locale.getDefault())
-        ImageViewCompat.setImageTintList(
-            statusBullet,
-            ColorStateList.valueOf(resolveStatusColor(character.status))
-        )
-        type.text = if (character.type.isEmpty()) "-" else character.type
-        species.text = character.species
-        gender.text = character.gender.name.toLowerCase(Locale.getDefault())
-        episodes.text = character.episode.joinToString(separator = ", ") {
-            it.substring(it.lastIndexOf("/") + 1)
-        }
-        lastLoc.text = character.location?.name ?: "-"
-        refreshFavButtonState(character.id)
+        refreshFavButtonState(character.id.toString())
     }
 
     /**
@@ -194,23 +170,6 @@ class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
     private fun onCancelErrorDialogClick() {
 
         dismissDialog()
-    }
-
-    /**
-     * Resolves status color
-     *
-     * @param status [Character.status]
-     * @return Int - Color as Int (not color res id)
-     */
-    private fun resolveStatusColor(status: Character.Status): Int {
-        return ContextCompat.getColor(
-            this,
-            when (status) {
-                Character.Status.ALIVE -> R.color.characterDetail_status_alive
-                Character.Status.DEAD -> R.color.characterDetail_status_dead
-                Character.Status.UNKNOWN -> R.color.characterDetail_status_unknown
-            }
-        )
     }
 
     /**

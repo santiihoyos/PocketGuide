@@ -2,6 +2,7 @@ package com.santiihoyos.pocketguide.di
 
 import android.app.Application
 import com.santiihoyos.characters.di.CharactersComponent
+import com.santiihoyos.marvelguide.BuildConfig
 import com.santiihoyos.pocketguide.main.view.MainActivity
 import com.santiihoyos.pocketguide.dummy.view.DummyFragment
 import dagger.BindsInstance
@@ -48,7 +49,11 @@ interface AppComponent {
 
             if (!this::instance.isInitialized) {
 
-                val charactersComponent = CharactersComponent.init(application)
+                val charactersComponent = CharactersComponent.init(
+                    application,
+                    BuildConfig.API_KEY,
+                    BuildConfig.PRIVATE_KEY
+                )
 
                 instance = DaggerAppComponent.builder()
                     .application(application)

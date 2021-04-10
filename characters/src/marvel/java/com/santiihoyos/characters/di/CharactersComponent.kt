@@ -2,7 +2,7 @@ package com.santiihoyos.characters.di
 
 import android.content.Context
 import com.santiihoyos.api_keyvalue.di.ApiKeyValueComponent
-import com.santiihoyos.api_rickandmorty.di.ApiRickAndMortyComponent
+import com.santiihoyos.api_marvel.di.ApiMarvelComponent
 import com.santiihoyos.characters.detail.view.CharacterDetailActivity
 import com.santiihoyos.characters.list.view.CharacterListFragment
 import dagger.BindsInstance
@@ -14,7 +14,7 @@ import dagger.Component
         CharactersModule::class
     ],
     dependencies = [
-        ApiRickAndMortyComponent::class,
+        ApiMarvelComponent::class,
         ApiKeyValueComponent::class
     ]
 )
@@ -34,14 +34,16 @@ interface CharactersComponent {
          * @return DataComponent implementation
          */
         fun init(
-            context: Context
+            context: Context,
+            apiKey: String,
+            privateKey: String
         ): CharactersComponent {
 
             if (!this::instance.isInitialized) {
 
                 instance = DaggerCharactersComponent.builder()
                     .application(context)
-                    .apiRickAndMortyComponent(ApiRickAndMortyComponent.init())
+                    .apiRickAndMortyComponent(ApiMarvelComponent.init(apiKey, privateKey))
                     .apiKeyValueComponent(ApiKeyValueComponent.init(context))
                     .build()
             }
@@ -56,7 +58,7 @@ interface CharactersComponent {
         @BindsInstance
         fun application(context: Context): Builder
 
-        fun apiRickAndMortyComponent(dataComponent: ApiRickAndMortyComponent): Builder
+        fun apiRickAndMortyComponent(dataComponent: ApiMarvelComponent): Builder
 
         fun apiKeyValueComponent(apiKeyValueComponent: ApiKeyValueComponent): Builder
 

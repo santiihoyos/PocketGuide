@@ -8,24 +8,23 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.santiihoyos.base.extensions.loadFromUrl
 import com.santiihoyos.characters.R
 import com.santiihoyos.characters.entity.Character
 
 /**
  * [RecyclerView.Adapter] that can display a [Character].
  */
-class CharacterRecyclerViewAdapter(
-    val onCharacterClickListener: (character: Character) -> Unit
-) : PagingDataAdapter<Character, CharacterRecyclerViewAdapter.ViewHolder>(diffCallback) {
+open class CharacterRecyclerViewAdapter: PagingDataAdapter<Character, CharacterRecyclerViewAdapter.ViewHolder>(diffCallback) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    open var onCharacterClickListener: ((character: Character) -> Unit)? = null
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterRecyclerViewAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.fragment_character_list_item, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(view, onCharacterClickListener)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CharacterRecyclerViewAdapter.ViewHolder, position: Int) {
 
         getItem(position)?.let(holder::bind)
     }
@@ -49,26 +48,28 @@ class CharacterRecyclerViewAdapter(
     /**
      * Holder for Character item
      */
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    open inner class ViewHolder(
+        view: View,
+        private val onCharacterClickListener: ((character: Character) -> Unit)?
+    ) : RecyclerView.ViewHolder(view) {
 
         /**
          * name of character
          */
-        private val name: AppCompatTextView = view.findViewById(R.id.characters_characterItem_name_textView)
+        protected val name: AppCompatTextView = view.findViewById(R.id.characters_characterItem_name_textView)
 
         /**
          * Photo, loaded with Glide
          */
-        private val photo: AppCompatImageView = view.findViewById(R.id.characters_characterItem_imageView)
+        protected val photo: AppCompatImageView = view.findViewById(R.id.characters_characterItem_imageView)
 
         /**
          * Binds holder view instances with current data at position
          */
-        fun bind(character: Character) {
+        open fun bind(character: Character) {
 
             name.text = character.name
-            photo.loadFromUrl(character.image, R.drawable.character_photo_placeholder)
-            itemView.setOnClickListener { onCharacterClickListener(character) }
+            itemView.setOnClickListener { onCharacterClickListener?.invoke(character) }
         }
     }
 }

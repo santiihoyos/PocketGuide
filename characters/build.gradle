@@ -53,8 +53,13 @@ dependencies {
 
     //local modules dependencies
     implementation project(path: dependencies.moduleBase)
-    api project(path: dependencies.moduleApiRickAndMorty)
     api project(path: dependencies.moduleApiKeyValue)
+
+    //For flavor RickAndMorty we use :api_rickAndMorty module
+    rickAndMortyApi project(path: dependencies.moduleApiRickAndMorty)
+
+    //For flavor Marvel we use :api_marvel module
+    marvelApi project(path: dependencies.moduleApiMarvel)
 
     //Dagger
     kapt dependencies.daggerCompiler
@@ -64,7 +69,6 @@ dependencies {
     testImplementation testDependencies.mockito
     testImplementation testDependencies.mockitoKtxLib
     testImplementation testDependencies.coroutinesTest
-
 
     // UI tests with Android Espresso and Android Test runner
     androidTestImplementation testDependencies.espressoCore

@@ -35,6 +35,9 @@ class CharacterListFragment : BaseFragment<CharacterListViewModel>() {
     @Inject
     override lateinit var viewModelProviderFactory: ViewModelProvider.Factory
 
+    @Inject
+    lateinit var characterAdapter: CharacterRecyclerViewAdapter
+
     /**
      * RecyclerView of characters items
      */
@@ -64,7 +67,7 @@ class CharacterListFragment : BaseFragment<CharacterListViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView(2)
+        setupRecyclerView()
         viewModel.isLoading.observe(viewLifecycleOwner, ::onLoadingChange)
     }
 
@@ -72,7 +75,7 @@ class CharacterListFragment : BaseFragment<CharacterListViewModel>() {
 
         findNavController().navigate(
             R.id.action_characterListFragment_to_characterDetailActivity,
-            CharacterDetailActivityArgs(character.id, character.name).toBundle()
+            CharacterDetailActivityArgs(character.id.toString(), character.name).toBundle()
         )
     }
 
@@ -112,16 +115,19 @@ class CharacterListFragment : BaseFragment<CharacterListViewModel>() {
     /**
      * Setups recycler view with number of columns required by user
      */
-    private fun setupRecyclerView(columnCount: Int) = recyclerView?.apply {
+    private fun setupRecyclerView() = recyclerView?.apply {
 
+        val columnCount = resources.getInteger(R.integer.number_columns_character_list)
         layoutManager = when {
             columnCount <= 1 -> LinearLayoutManager(context)
             else -> GridLayoutManager(context, columnCount)
         }
 
-        val adapterInstance = CharacterRecyclerViewAdapter(
+        val adapterInstance = characterAdapter.apply {
+
             onCharacterClickListener = ::onCharacterClickItem
-        )
+        }
+
         adapter = adapterInstance
 
         addItemDecoration(CharacterItemDecoration(
@@ -135,12 +141,5 @@ class CharacterListFragment : BaseFragment<CharacterListViewModel>() {
 
             viewModel.loadNextCharacters().collectLatest(adapterInstance::submitData)
         }
-    }
-
-    /**
-     * Show error dialog with retry option to user
-     */
-    private fun onError() {
-
     }
 }
