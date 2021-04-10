@@ -3,23 +3,21 @@ package com.santiihoyos.characters.entity.mappers
 import com.santiihoyos.base_api.Mapper
 import com.santiihoyos.characters.entity.Character
 import com.santiihoyos.api_rickandmorty.response.CharacterResponse
-import com.santiihoyos.api_rickandmorty.response.LocationResponse
-import com.santiihoyos.characters.entity.Location
 import javax.inject.Inject
 
 const val STATUS_ALIVE = "Alive"
 const val STATUS_DEAD = "Dead"
-const val STATUS_UNKNOWN = "unknown"
+//const val STATUS_UNKNOWN = "unknown"
 const val GENDER_FEMALE = "Female"
 const val GENDER_MALE = "Male"
 const val GENDER_GENDERLESS = "Genderless"
-const val GENDER_UNKNOWN = "unknown"
+//const val GENDER_UNKNOWN = "unknown"
 
 /**
  * CharacterResponse to Character entity
  */
 class CharacterMapper @Inject constructor(
-    private val locationMapper: Mapper<LocationResponse, Location>
+    private val locationMapper: LocationMapper
 ) : Mapper<CharacterResponse, Character> {
 
     override fun map(originEntity: CharacterResponse) = Character(

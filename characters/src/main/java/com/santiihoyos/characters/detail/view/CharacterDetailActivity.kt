@@ -137,8 +137,11 @@ class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
     /**
      * Refresh with incoming [Character] instance all view data values.
      *
+     * note: suppress are to maintain compatibility with other flavors as quick fix
+     *
      * @param character - Character entity to paint
      */
+    @Suppress("USELESS_ELVIS", "RemoveRedundantCallsOfConversionMethods")
     private fun refreshDataValues(character: Character) {
 
         setupToolbar(character.name ?: "")

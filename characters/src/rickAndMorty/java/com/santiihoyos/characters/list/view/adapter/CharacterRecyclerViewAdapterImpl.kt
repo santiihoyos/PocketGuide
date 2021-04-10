@@ -12,7 +12,7 @@ import javax.inject.Inject
 /**
  * [RecyclerView.Adapter] that can display a [Character] of RickAndMorty Api.
  */
-internal class CharacterRecyclerViewAdapterImpl @Inject constructor() : CharacterRecyclerViewAdapter()  {
+class CharacterRecyclerViewAdapterImpl @Inject constructor() : CharacterRecyclerViewAdapter()  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterRecyclerViewAdapterImpl.ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -23,7 +23,7 @@ internal class CharacterRecyclerViewAdapterImpl @Inject constructor() : Characte
     /**
      * Override for bind because image comes from different apis
      */
-    internal inner class ViewHolder(
+    inner class ViewHolder(
         view: View,
         onCharacterClickListener: ((character: Character) -> Unit)?
     ) : CharacterRecyclerViewAdapter.ViewHolder(view, onCharacterClickListener){

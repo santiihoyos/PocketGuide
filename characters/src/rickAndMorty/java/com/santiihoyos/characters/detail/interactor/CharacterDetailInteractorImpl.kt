@@ -3,26 +3,20 @@
 package com.santiihoyos.characters.detail.interactor
 
 import android.util.Log
-import com.santiihoyos.api_rickandmorty.response.CharacterResponse
 import com.santiihoyos.api_rickandmorty.usecase.GetCharacterByIdUseCase
-import com.santiihoyos.base_api.Mapper
 import com.santiihoyos.base_api.repository.KeyValueRepository
 import com.santiihoyos.base_api.usecase.UseCaseException
 import com.santiihoyos.characters.entity.Character
-import kotlinx.coroutines.delay
+import com.santiihoyos.characters.entity.mappers.CharacterMapper
 import javax.inject.Inject
-import kotlin.jvm.Throws
 
 class CharacterDetailInteractorImpl @Inject constructor(
     private val getCharacterByIdUseCaseImpl: GetCharacterByIdUseCase,
     private val keyValueRepository: KeyValueRepository,
-    private val characterMapper: Mapper<CharacterResponse, Character>
+    private val characterMapper: CharacterMapper
 ) : CharacterDetailInteractor() {
 
     override suspend fun getCharacterById(id: String): Character? {
-
-        //Simulate delay to show loadings views... TODO: remove!
-        delay(500)
 
         try {
 
