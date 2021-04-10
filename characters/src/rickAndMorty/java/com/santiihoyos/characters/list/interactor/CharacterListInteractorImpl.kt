@@ -1,11 +1,10 @@
 package com.santiihoyos.characters.list.interactor
 
 import androidx.paging.*
-import com.santiihoyos.api_rickandmorty.response.CharacterResponse
 import com.santiihoyos.api_rickandmorty.usecase.GetCharactersPagingUseCase
 import com.santiihoyos.characters.entity.Character
-import com.santiihoyos.base_api.Mapper
 import com.santiihoyos.base_api.usecase.UseCaseException
+import com.santiihoyos.characters.entity.mappers.CharacterMapper
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -13,7 +12,7 @@ private const val SIZE_BY_PAGE = 20
 
 class CharacterListInteractorImpl @Inject constructor(
     private val getCharactersPagingUseCaseImpl: GetCharactersPagingUseCase,
-    private val characterMapper: Mapper<CharacterResponse, Character>
+    private val characterMapper: CharacterMapper
 ) : CharacterListInteractor() {
 
     override suspend fun getNextCharacters(): Flow<PagingData<Character>> {
