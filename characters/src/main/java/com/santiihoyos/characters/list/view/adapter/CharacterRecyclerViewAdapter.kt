@@ -8,7 +8,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.santiihoyos.base.feature.extensions.loadFromUrl
+import com.santiihoyos.base.extensions.loadFromUrl
 import com.santiihoyos.characters.R
 import com.santiihoyos.characters.entity.Character
 

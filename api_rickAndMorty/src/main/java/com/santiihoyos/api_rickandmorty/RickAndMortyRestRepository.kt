@@ -4,7 +4,7 @@ import com.santiihoyos.base_api.repository.RestRepository
 import com.santiihoyos.api_rickandmorty.response.CharacterResponse
 import com.santiihoyos.api_rickandmorty.response.CharactersResponse
 
-interface RickAndMortyRestRepository : RestRepository {
+internal interface RickAndMortyRestRepository : RestRepository {
 
     /**
      * Get all characters of Rick&Morty universe

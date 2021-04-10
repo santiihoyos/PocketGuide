@@ -1,4 +1,5 @@
 # PocketGuide Android
+[![CI](https://github.com/santiihoyos/PocketGuide/actions/workflows/test%20for%20all%20build%20variants%20and%20flavors.yml/badge.svg?branch=master)](https://github.com/santiihoyos/PocketGuide/actions/workflows/test%20for%20all%20build%20variants%20and%20flavors.yml)
 
 ### Code challenges for: 
   - Paradigma Digital (flavor for Rick&MortyApi)
@@ -10,12 +11,16 @@
 
 Este repositorio contiene la aplicación Android "PocketGuide" esta aplicación permite al usuario consultar las apis de http://rickandmortyapi.com y https://developer.marvel.com
 
+## Get started!
+
+⚠️ Attention: For **marvelDebug** or **marvelRelease** builds target you need setup this props into **local.properties**
+> marvel.apiKey="here_your_api_key_from_developer.marvel.com"
+> marvel.privateKey="here_your_private_key_from_developer.marvel.com"
 
 ## Resumen de la arquitectura (MVVM)
 
 ### Grafico de MVVM
 ![arquitectura](https://user-images.githubusercontent.com/10730150/113680141-d6689f00-96c0-11eb-979d-a0aed945d296.jpg)
-
 
 
 ### Libraries
@@ -53,10 +58,10 @@ Contiene el código la definicion del repositorio de https://developer.marvel.co
 Es un modulo que abstrae el concepto de guardar mediante pares clave valor mediante KeyValueRepository y con una implementación usando SharedPreferences de Android.
 
 ### :characters
-Contiene las abstraciones de los casos de uso y sus implementaciones implementa un listado de characters y un pequeño detella donde se puede marcar a un personaje como favorito.
+Contiene las abstraciones de los casos de uso y sus implementaciones de los personajes de RickAndMorty. Implementa un listado de characters y un pequeño detella donde se puede marcar a un personaje como favorito.
 
-### :heroes
-En implementación y será parecido a :characters pero para la api de marvel.
+### :marvel_characters
+Contiene las abstraciones de los casos de uso y sus implementaciones de los personajes de Marvel. Implementa un listado de characters y un pequeño detella donde se puede marcar a un personaje como favorito.
 
 ### :app
 Módulo de entrada a la app, además contiene un Fragment dummy para rellenar el nav y el Main ambos como la misma estructura que el resto de la app.

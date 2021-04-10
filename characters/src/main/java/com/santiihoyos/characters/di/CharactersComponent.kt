@@ -1,6 +1,5 @@
 package com.santiihoyos.characters.di
 
-import android.app.Application
 import android.content.Context
 import com.santiihoyos.api_keyvalue.di.ApiKeyValueComponent
 import com.santiihoyos.api_rickandmorty.di.ApiRickAndMortyComponent

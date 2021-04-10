@@ -12,9 +12,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.santiihoyos.base.feature.abstracts.BaseFragment
-import com.santiihoyos.base.feature.extensions.gone
-import com.santiihoyos.base.feature.extensions.invisible
-import com.santiihoyos.base.feature.extensions.visible
+import com.santiihoyos.base.extensions.gone
+import com.santiihoyos.base.extensions.invisible
+import com.santiihoyos.base.extensions.visible
 import com.santiihoyos.characters.R
 import com.santiihoyos.characters.detail.view.CharacterDetailActivityArgs
 import com.santiihoyos.characters.di.CharactersComponent

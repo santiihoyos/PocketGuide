@@ -12,6 +12,7 @@ ext {
     buildGradleVersion = '4.1.3'
     dagger_version = '2.34'
     retrofitVersion = '2.9.0'
+    okHttpVersion = '4.9.1'
     navigation_version = '2.3.4'
     lifecycle = '2.3.1'
     picasso = '2.8'
@@ -36,32 +37,33 @@ ext {
     lintVersion = '27.1.1'
 
     dependencies = [
-            moduleBase           : ":base",
-            moduleBaseApi        : ":base_api",
-            moduleApiRickAndMorty: ":api_rickAndMorty",
-            moduleApiMarvel      : ":api_marvel",
-            moduleApiKeyValue    : ":api_keyvalue",
-            moduleCharacters     : ":characters",
-            moduleHeroes         : ":heroes",
+            moduleBase              : ":base",
+            moduleBaseApi           : ":base_api",
+            moduleApiRickAndMorty   : ":api_rickAndMorty",
+            moduleApiMarvel         : ":api_marvel",
+            moduleApiKeyValue       : ":api_keyvalue",
+            moduleCharacters        : ":characters",
 
-            kotlin               : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
-            daggerCompiler       : "com.google.dagger:dagger-compiler:${dagger_version}",
-            dagger               : "com.google.dagger:dagger:${dagger_version}",
-            androidxCore         : "androidx.core:core-ktx:${androidx_core}",
-            androidxAppCompat    : "androidx.appcompat:appcompat:${androidx_appCompat}",
-            materialComponents   : "com.google.android.material:material:1.3.0",
-            recyclerView         : "androidx.recyclerview:recyclerview:$recyclerView",
-            constraintLayout     : "androidx.constraintlayout:constraintlayout:${constraintLayout}",
-            picasso              : "com.squareup.picasso:picasso:${picasso}",
-            navigationUi         : "androidx.navigation:navigation-ui-ktx:${navigation_version}",
-            navigationFragment   : "androidx.navigation:navigation-fragment-ktx:${navigation_version}",
-            liveData             : "androidx.lifecycle:lifecycle-livedata-ktx:${lifecycle}",
-            viewModel            : "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycle}",
-            paging               : "androidx.paging:paging-runtime-ktx:${paging}",
-            retrofit             : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-            retrofitConverter    : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            retrofitAdapter      : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
-            androidxLegacySup    : "androidx.legacy:legacy-support-v4:${androidx_legacySup}"
+            kotlin                  : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
+            daggerCompiler          : "com.google.dagger:dagger-compiler:${dagger_version}",
+            dagger                  : "com.google.dagger:dagger:${dagger_version}",
+            androidxCore            : "androidx.core:core-ktx:${androidx_core}",
+            androidxAppCompat       : "androidx.appcompat:appcompat:${androidx_appCompat}",
+            materialComponents      : "com.google.android.material:material:1.3.0",
+            recyclerView            : "androidx.recyclerview:recyclerview:$recyclerView",
+            constraintLayout        : "androidx.constraintlayout:constraintlayout:${constraintLayout}",
+            picasso                 : "com.squareup.picasso:picasso:${picasso}",
+            navigationUi            : "androidx.navigation:navigation-ui-ktx:${navigation_version}",
+            navigationFragment      : "androidx.navigation:navigation-fragment-ktx:${navigation_version}",
+            liveData                : "androidx.lifecycle:lifecycle-livedata-ktx:${lifecycle}",
+            viewModel               : "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycle}",
+            paging                  : "androidx.paging:paging-runtime-ktx:${paging}",
+            retrofit                : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofitConverter       : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            retrofitAdapter         : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+            androidxLegacySup       : "androidx.legacy:legacy-support-v4:${androidx_legacySup}",
+            okHttpLoggingInterceptor: "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
+
     ]
 
     testDependencies = [

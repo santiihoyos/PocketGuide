@@ -3,7 +3,7 @@ include ':api_keyvalue'
 include ':api_marvel'
 include ':api_rickAndMorty'
 include ':base'
-include ':heroes'
+include ':marvel_characters'
 include ':characters'
 include ':app'
 rootProject.name = "PocketGuide"

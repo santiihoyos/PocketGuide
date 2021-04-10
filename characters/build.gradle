@@ -37,6 +37,12 @@ android {
         rickAndMorty {
             dimension "codeChallenge"
         }
+
+        //Flavor for OpenBank code challenge
+        marvel {
+            dimension "codeChallenge"
+        }
+
     }
 }
 
