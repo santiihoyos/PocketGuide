@@ -22,4 +22,5 @@ dependencies {
     implementation dependencies.retrofit
     implementation dependencies.retrofitConverter
     implementation dependencies.retrofitAdapter
+    implementation dependencies.okHttpLoggingInterceptor
 }

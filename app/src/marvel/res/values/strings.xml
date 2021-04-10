@@ -3,4 +3,7 @@
 
     <string name="app_name">Marvel PocketGuide</string>
 
+    <!-- marvel public api key -->
+    <string name="marvelApiKey">ee1e6532fc234738b7a212da7c0c98e8</string>
+
 </resources>

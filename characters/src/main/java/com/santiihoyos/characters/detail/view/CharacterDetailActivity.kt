@@ -16,9 +16,9 @@ import androidx.core.widget.ImageViewCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.santiihoyos.base.feature.abstracts.BaseActivity
-import com.santiihoyos.base.feature.extensions.invisible
-import com.santiihoyos.base.feature.extensions.loadFromUrl
-import com.santiihoyos.base.feature.extensions.visible
+import com.santiihoyos.base.extensions.invisible
+import com.santiihoyos.base.extensions.loadFromUrl
+import com.santiihoyos.base.extensions.visible
 import com.santiihoyos.characters.R
 import com.santiihoyos.characters.detail.viewModel.CharacterDetailViewModel
 import com.santiihoyos.characters.di.CharactersComponent

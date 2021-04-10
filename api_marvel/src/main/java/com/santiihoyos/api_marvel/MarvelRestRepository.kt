@@ -1,21 +1,30 @@
 package com.santiihoyos.api_marvel
 
-import com.santiihoyos.api_marvel.response.HeroResponse
-import com.santiihoyos.api_marvel.response.HeroesResponse
+import com.santiihoyos.api_marvel.response.CharacterResponse
 import com.santiihoyos.base_api.repository.RestRepository
 
 
-interface MarvelRestRepository : RestRepository {
+internal interface MarvelRestRepository : RestRepository {
 
     /**
-     * Get all characters of Rick&Morty universe
-     * Paginated!!!
+     * Get all heroes of Disney & Marvel universe
+     * This list is paginated.
+     *
+     * @param page - current page to read
+     * @return HeroesResponse with server response
      */
-    suspend fun getCharactersAtPage(page: Int): HeroesResponse
+    suspend fun getCharactersByPage(
+        orderBy: String,
+        offset: Int,
+        limit: Int
+    ): CharacterResponse
 
     /**
-     * Get Only one character searching by id
+     * Get Only one hero searching by id
+     *
+     * @param id - unique id of hero
+     * @return HeroesResponse with server response
      */
-    suspend fun getCharacterById(id: String): HeroResponse?
+    suspend fun getCharactersById(id: String): CharacterResponse?
 
 }

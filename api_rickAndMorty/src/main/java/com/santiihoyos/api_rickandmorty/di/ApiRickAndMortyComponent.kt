@@ -10,12 +10,19 @@ import dagger.Component
 interface ApiRickAndMortyComponent {
 
     /**
-     * Exposes to other components RestRepository implementation.
+     * Exposes to other components UseCase implementation.
+     * for get characters paginated list.
      *
-     * @return RestRepository implementation
+     * @return GetCharactersPagingUseCase implementation
      */
     fun getCharactersPagingUseCase(): GetCharactersPagingUseCase
 
+    /**
+     * Exposes to other components UseCase implementation.
+     * for get character by id.
+     *
+     * @return GetCharacterByIdUseCase implementation
+     */
     fun getCharacterByIdUseCase(): GetCharacterByIdUseCase
 
     companion object {
