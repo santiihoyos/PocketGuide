@@ -11,7 +11,7 @@ try {
     properties.load(project.rootProject.file("local.properties").newDataInputStream())
 } catch (ignored) {
 
-    //if local properties is missing we try to load CI properties becouse normally
+    //if local properties is missing we try to load CI properties because normally
     //when this exception happens is because build is running on CI container
     properties.load(project.rootProject.file("ci.properties").newDataInputStream())
 }
@@ -42,7 +42,7 @@ android {
     buildTypes {
         release {
             debuggable true
-            signingConfig signingConfigs.release //Comentar para Jenkins
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -62,8 +62,8 @@ android {
             dimension "codeChallenge"
             applicationIdSuffix = ".marvel"
 
-            buildConfigField "String", "API_KEY", properties.getProperty("marvel.apiKey", "")
-            buildConfigField "String", "PRIVATE_KEY", properties.getProperty("marvel.privateKey", "")
+            buildConfigField "String", "API_KEY", properties.getProperty("marvel.apiKey", "\"\"")
+            buildConfigField "String", "PRIVATE_KEY", properties.getProperty("marvel.privateKey", "\"\"")
         }
     }
 

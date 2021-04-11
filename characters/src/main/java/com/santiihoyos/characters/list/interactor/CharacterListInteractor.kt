@@ -13,6 +13,6 @@ abstract class CharacterListInteractor: BaseInteractor() {
     /**
      *  get characters page (20 character objects by page)
      */
-    abstract suspend fun getNextCharacters(): Flow<PagingData<Character>>
+    abstract suspend fun getNextCharacters(page: Int): List<Character>?
 
 }
