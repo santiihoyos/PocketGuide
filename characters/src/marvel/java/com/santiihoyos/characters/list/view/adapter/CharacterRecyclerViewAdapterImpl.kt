@@ -32,7 +32,7 @@ class CharacterRecyclerViewAdapterImpl @Inject constructor() : CharacterRecycler
             super.bind(character)
 
             photo.loadFromUrl(
-                imageUrl = character.getPreviewImageUrlFor() ?: "",
+                imageUrl = character.getPreviewImageUrl() ?: "",
                 placeHolder = R.drawable.character_photo_placeholder
             )
         }

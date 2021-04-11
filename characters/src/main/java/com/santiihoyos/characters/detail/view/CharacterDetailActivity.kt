@@ -124,13 +124,14 @@ abstract class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>(
         lifecycleScope.launch(Dispatchers.IO) {
 
             val isFavThisCharacter = viewModel.isUserCharacterFavorite(characterId)
-
-            favButton.setImageDrawable(
-                ContextCompat.getDrawable(
-                    this@CharacterDetailActivity,
-                    if (isFavThisCharacter) R.drawable.ic_heart_filled else R.drawable.ic_heart_empty
+            lifecycleScope.launch(Dispatchers.Main) {
+                favButton.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        this@CharacterDetailActivity,
+                        if (isFavThisCharacter) R.drawable.ic_heart_filled else R.drawable.ic_heart_empty
+                    )
                 )
-            )
+            }
         }
     }
 
