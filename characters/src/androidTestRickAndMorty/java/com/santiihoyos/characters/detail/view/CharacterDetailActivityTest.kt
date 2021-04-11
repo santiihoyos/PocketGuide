@@ -30,7 +30,7 @@ class CharacterDetailActivityTest {
             override fun create(intent: Intent): CharacterDetailActivity {
 
                 val context = InstrumentationRegistry.getInstrumentation().targetContext
-                val activity = CharacterDetailActivity()
+                val activity = CharacterDetailActivityImpl()
                 CharactersComponent.instance = DaggerCharactersComponent.builder()
                     .application(context)
                     .apiKeyValueComponent(DaggerApiKeyValueComponent.builder().context(context).build())
@@ -50,7 +50,7 @@ class CharacterDetailActivityTest {
     fun testCharacterNameIsOkShowedToUser() {
 
         activityRule.launchActivity(Intent().apply {
-            putExtras(CharacterDetailActivityArgs("1", "Rick Sanchez").toBundle())
+            putExtras(CharacterDetailActivityImplArgs("1", "Rick Sanchez").toBundle())
         })
         onView(
             withId(R.id.characterDetailActivity_value_name)
