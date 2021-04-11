@@ -2,6 +2,8 @@ package com.santiihoyos.api_rickandmorty
 
 import com.santiihoyos.api_rickandmorty.response.CharacterResponse
 import com.santiihoyos.api_rickandmorty.response.CharactersResponse
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -28,6 +30,7 @@ internal interface RickAndMortyRestRepositoryRetrofitImpl : RickAndMortyRestRepo
 
             if (!Companion::instance.isInitialized) {
                 instance = Retrofit.Builder()
+                    .client(getOkHttpClient())
                     .baseUrl(API_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
@@ -35,6 +38,22 @@ internal interface RickAndMortyRestRepositoryRetrofitImpl : RickAndMortyRestRepo
             }
 
             return instance
+        }
+
+
+        /**
+         * Builds http client for intercept all calls and add required query params.
+         * also add some interceptors to log request and response
+         *
+         * @return OkHttpClient - http client with interceptors
+         */
+        private fun getOkHttpClient(): OkHttpClient {
+
+            val okHttpBuilder = OkHttpClient.Builder()
+            okHttpBuilder.addInterceptor(HttpLoggingInterceptor().apply {
+                setLevel(HttpLoggingInterceptor.Level.BODY)
+            })
+            return okHttpBuilder.build()
         }
     }
 

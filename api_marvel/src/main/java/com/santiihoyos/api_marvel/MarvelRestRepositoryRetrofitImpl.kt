@@ -62,7 +62,7 @@ internal interface MarvelRestRepositoryRetrofitImpl : MarvelRestRepository {
         }
 
         /**
-         * Builds http client for intercept all calls and add apiKey param.
+         * Builds http client for intercept all calls and add required query params.
          * also add some interceptors to log request and response
          *
          * @return OkHttpClient - http client with interceptors
@@ -80,6 +80,10 @@ internal interface MarvelRestRepositoryRetrofitImpl : MarvelRestRepository {
             return okHttpBuilder.build()
         }
 
+        /**
+         * Creates Interceptor to provide required params by api
+         * apikey, ts and hash query params
+         */
         private fun getAuthInterceptor(
             apiKey: String,
             privateKey: String
@@ -97,7 +101,14 @@ internal interface MarvelRestRepositoryRetrofitImpl : MarvelRestRepository {
         }
 
 
-        fun md5(stringToHash: String): String {
+        /**
+         * Converts to MD5 timeStamp + private key + api key
+         * string.
+         *
+         * @param stringToHash to calculate MD5
+         * @return String of passed string
+         */
+        private fun md5(stringToHash: String): String {
             val md5 = "MD5"
 
             try {
