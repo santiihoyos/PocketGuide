@@ -3,9 +3,10 @@
 
     <!-- Common -->
     <string name="loading">"Loading…"</string>
-    
+    <string name="retry">"Retry"</string>
+
     <!-- Character List -->
-    <string name="characterListFragment_error_message">"Sorry, We have problems to get Characters list. Please try again."</string>
+    <string name="characterListFragment_error_message">"Sorry, We have problems to get Characters list. Please check internet connection is OK try again."</string>
 
     <!-- Character Detail -->
     <string name="characterDetailActivity_error_message">"Sorry, We have problems to get required Character. Please try again."</string>

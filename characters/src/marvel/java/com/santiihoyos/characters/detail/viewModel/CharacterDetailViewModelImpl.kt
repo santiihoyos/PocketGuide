@@ -9,10 +9,6 @@ class CharacterDetailViewModelImpl @Inject constructor(
     private val characterDetailInteractor: CharacterDetailInteractor
 ): CharacterDetailViewModel() {
 
-    init {
-        Log.i("INJECTADO", characterDetailInteractor.toString())
-    }
-
     override suspend fun getCharacter(characterId: String): Character? {
 
         return characterDetailInteractor.getCharacterById(characterId)

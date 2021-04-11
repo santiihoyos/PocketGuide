@@ -6,4 +6,6 @@
     <color name="characterDetail_status_unknown">#474D51</color>
     <color name="heart_color">#f44336</color>
     
+    <color name="ic_broke_color">#9C9C9C</color>
+    
 </resources>

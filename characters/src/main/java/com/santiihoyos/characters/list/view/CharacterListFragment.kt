@@ -1,20 +1,26 @@
 package com.santiihoyos.characters.list.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.constraintlayout.widget.Group
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.santiihoyos.base.feature.abstracts.BaseFragment
 import com.santiihoyos.base.extensions.gone
 import com.santiihoyos.base.extensions.invisible
 import com.santiihoyos.base.extensions.visible
+import com.santiihoyos.base.feature.abstracts.BaseActivity
 import com.santiihoyos.characters.R
 import com.santiihoyos.characters.detail.view.CharacterDetailActivityImplArgs
 import com.santiihoyos.characters.di.CharactersComponent
@@ -50,11 +56,27 @@ class CharacterListFragment : BaseFragment<CharacterListViewModel>() {
     }
 
     /**
+     * ProgressBar of characters items
+     */
+    private val progressBar: ProgressBar? by lazy {
+
+        view?.findViewById(R.id.characters_charactersFragment_progress)
+    }
+
+    /**
      * SwipeRefreshLayout of characters items
      */
-    private val loadingGroup: Group? by lazy {
+    private val swipeRefreshLayout: SwipeRefreshLayout? by lazy {
 
-        view?.findViewById(R.id.characters_charactersFragment_loadingGroup)
+        view?.findViewById(R.id.characters_charactersFragment_swipeRefreshLayout)
+    }
+
+    /**
+     * Group to show when api data comes empty
+     */
+    private val emptyGroup: Group? by lazy {
+
+        view?.findViewById(R.id.characters_characterFragment_group_empty)
     }
 
     override fun getViewModelAbstract() = CharacterListViewModel::class.java
@@ -70,8 +92,10 @@ class CharacterListFragment : BaseFragment<CharacterListViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
+        showLoading()
         setupRecyclerView()
-        viewModel.isLoading.observe(viewLifecycleOwner, ::onLoadingChange)
+        setupRefreshLayout()
+        bindPageSourceToAdapter()
     }
 
     /**
@@ -89,25 +113,11 @@ class CharacterListFragment : BaseFragment<CharacterListViewModel>() {
     }
 
     /**
-     * Hook called when viewModel changes its loading status
-     */
-    private fun onLoadingChange(isViewModelBusy: Boolean) {
-
-        if (isViewModelBusy) {
-
-            showLoading()
-        } else {
-
-            hideLoading()
-        }
-    }
-
-    /**
      * Show loading components
      */
     private fun showLoading() {
 
-        loadingGroup.visible()
+        progressBar.visible()
         recyclerView.invisible()
     }
 
@@ -117,12 +127,13 @@ class CharacterListFragment : BaseFragment<CharacterListViewModel>() {
      */
     private fun hideLoading() {
 
-        loadingGroup.gone()
+        progressBar.gone()
         recyclerView.visible()
     }
 
     /**
-     * Setups recycler view with number of columns required by user
+     * Setups recycler view with number of columns
+     * and call viewModel for get data
      */
     private fun setupRecyclerView() = recyclerView?.apply {
 
@@ -134,21 +145,71 @@ class CharacterListFragment : BaseFragment<CharacterListViewModel>() {
 
         val adapterInstance = characterAdapter.apply {
 
-            onCharacterClickListener = ::onCharacterClickItem
+
         }
 
         adapter = adapterInstance
 
-        addItemDecoration(CharacterItemDecoration(
-            resources.getDimension(R.dimen.character_list_item_margin).toInt(),
-            columnCount
-        ))
+        addItemDecoration(
+            CharacterItemDecoration(
+                resources.getDimension(R.dimen.character_list_item_margin).toInt(),
+                columnCount
+            )
+        )
 
         setHasFixedSize(true)
+    }
 
-        lifecycleScope.launch(Dispatchers.IO) {
+    private fun bindPageSourceToAdapter() = lifecycleScope.launch(Dispatchers.IO) {
 
-            viewModel.loadNextCharacters().collectLatest(adapterInstance::submitData)
+        characterAdapter.onCharacterClickListener = ::onCharacterClickItem
+        lifecycleScope.launch(Dispatchers.Main) {
+
+            viewModel.loadNextCharacters().collectLatest(characterAdapter::submitData)
+        }
+        lifecycleScope.launch(Dispatchers.Main) {
+
+            characterAdapter.loadStateFlow.collectLatest(::listenCharacterListAdapter)
+        }
+    }
+
+    private fun listenCharacterListAdapter(loadState: CombinedLoadStates) {
+
+        Log.i("LoadState", loadState.refresh.toString())
+
+        when (loadState.refresh) {
+
+            is LoadState.Error -> (activity as BaseActivity<*>).showGenericErrorRetryDialog(
+                onOkClickListener = { characterAdapter.refresh() },
+                message = R.string.characterListFragment_error_message,
+                okText = R.string.retry
+            )
+
+            is LoadState.Loading -> {
+
+                emptyGroup.invisible()
+                showLoading()
+            }
+
+            is LoadState.NotLoading -> {
+                hideLoading()
+
+                //After first load results were empty
+                if (characterAdapter.itemCount == 0) {
+
+                    emptyGroup.visible()
+
+                }
+            }
+        }
+    }
+
+    private fun setupRefreshLayout() {
+
+        swipeRefreshLayout?.setOnRefreshListener {
+
+            swipeRefreshLayout?.isRefreshing = false
+            characterAdapter.refresh()
         }
     }
 }

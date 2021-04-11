@@ -44,7 +44,7 @@ class CharacterListViewModelImplTest {
         //When interactor mock is called by viewModel we return mocked data
         //for first call we return firstEmission
         //for second call we return secondEmission
-        whenever(interactorMock.getNextCharacters()).then {
+        whenever(interactorMock.getCharactersPageSource()).then {
 
             when (callCount) {
                 1 -> mockFlow.offer(firstEmission) //offers first page with characters 1, 2

@@ -45,16 +45,22 @@ abstract class BaseActivity<T : BaseViewModel> : AppCompatActivity() {
      * @param onOkClickListener - calback when user taps into OK button
      * @param onCancelClickListener - calback when user taps into CANCEL button
      */
-    protected fun showGenericErrorRetryDialog(
+    public fun showGenericErrorRetryDialog(
         @StringRes message: Int?,
+        @StringRes okText: Int? = null,
         onOkClickListener: () -> Unit,
-        onCancelClickListener: () -> Unit
+        onCancelClickListener: (() -> Unit)? = null
     ) {
 
         val builder = AlertDialog.Builder(this)
         builder.setMessage(message ?: R.string.baseActivity_generic_error_message)
-            .setPositiveButton(android.R.string.ok) { _, _ -> onOkClickListener() }
-            .setNegativeButton(android.R.string.cancel) { _, _ -> onCancelClickListener() }
+            .setPositiveButton(okText ?: android.R.string.ok) { _, _ -> onOkClickListener() }
+
+        if (onCancelClickListener != null) {
+
+            builder.setNegativeButton(android.R.string.cancel) { _, _ -> onCancelClickListener() }
+        }
+
         currentGenericRetryErrorDialog = builder.create()
         currentGenericRetryErrorDialog!!.show()
     }
