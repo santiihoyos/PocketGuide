@@ -8,7 +8,7 @@ import com.santiihoyos.characters.entity.mappers.CharacterMapper
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-private const val SIZE_BY_PAGE = 20
+private const val SIZE_BY_PAGE = 10
 
 class CharacterListInteractorImpl @Inject constructor(
     private val getCharactersPagingUseCaseImpl: GetCharactersPagingUseCase,
@@ -34,7 +34,7 @@ class CharacterListInteractorImpl @Inject constructor(
                 return try {
                     val response = getCharactersPagingUseCaseImpl.execute(pageSource)
                     return LoadResult.Page(
-                        data = characterMapper.map(response) ?: emptyList(),
+                        data = characterMapper.map(response)?.sortedBy { it.getPreviewImageUrl() } ?: emptyList(),
                         prevKey = if (pageSource == 1) null else pageSource - 1,
                         nextKey = if (response.data?.results.isNullOrEmpty()) null else pageSource + 1
                     )

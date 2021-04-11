@@ -38,8 +38,18 @@ data class Character(
      *
      * @return String with public image url
      */
-    fun getPreviewImageUrlFor(): String? = imageUrl?.let { _imageUrl ->
+    fun getPreviewImageUrl(): String? = imageUrl?.let { _imageUrl ->
 
-        return@let imageExtension?.let { _imageExtension -> "$_imageUrl./standard_xlarge.$_imageExtension" }
+        return@let imageExtension?.let { _imageExtension -> "$_imageUrl/standard_xlarge.$_imageExtension" }
+    }
+
+    /**
+     * Resolve image url for 500x500px used in lists for example to avoid overflow memory
+     *
+     * @return String with public image url
+     */
+    fun getImageDetailUrl(): String? = imageUrl?.let { _imageUrl ->
+
+        return@let imageExtension?.let { _imageExtension -> "$_imageUrl/standard_fantastic.$_imageExtension" }
     }
 }
