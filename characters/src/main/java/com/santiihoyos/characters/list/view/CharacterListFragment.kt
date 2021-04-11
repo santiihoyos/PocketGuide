@@ -16,7 +16,7 @@ import com.santiihoyos.base.extensions.gone
 import com.santiihoyos.base.extensions.invisible
 import com.santiihoyos.base.extensions.visible
 import com.santiihoyos.characters.R
-import com.santiihoyos.characters.detail.view.CharacterDetailActivityArgs
+import com.santiihoyos.characters.detail.view.CharacterDetailActivityImplArgs
 import com.santiihoyos.characters.di.CharactersComponent
 import com.santiihoyos.characters.entity.Character
 import com.santiihoyos.characters.list.view.adapter.CharacterRecyclerViewAdapter
@@ -35,6 +35,9 @@ class CharacterListFragment : BaseFragment<CharacterListViewModel>() {
     @Inject
     override lateinit var viewModelProviderFactory: ViewModelProvider.Factory
 
+    /**
+     * Recycler view adapter for characters list item
+     */
     @Inject
     lateinit var characterAdapter: CharacterRecyclerViewAdapter
 
@@ -71,11 +74,17 @@ class CharacterListFragment : BaseFragment<CharacterListViewModel>() {
         viewModel.isLoading.observe(viewLifecycleOwner, ::onLoadingChange)
     }
 
+    /**
+     * Listen click on list intem
+     *
+     * suppress are for quick fix between flavors.
+     */
+    @Suppress("RemoveRedundantCallsOfConversionMethods")
     private fun onCharacterClickItem(character: Character) {
 
         findNavController().navigate(
             R.id.action_characterListFragment_to_characterDetailActivity,
-            CharacterDetailActivityArgs(character.id.toString(), character.name).toBundle()
+            CharacterDetailActivityImplArgs(character.id.toString(), character.name).toBundle()
         )
     }
 

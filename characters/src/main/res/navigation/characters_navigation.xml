@@ -6,7 +6,7 @@
 
     <activity
         android:id="@+id/navigation_characterDetail"
-        android:name="com.santiihoyos.characters.detail.view.CharacterDetailActivity"
+        android:name="com.santiihoyos.characters.detail.view.CharacterDetailActivityImpl"
         android:label="CharacterDetailActivity">
         <argument
             android:name="characterId"
