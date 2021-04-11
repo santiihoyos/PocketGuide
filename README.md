@@ -17,6 +17,9 @@ Este repositorio contiene la aplicación Android "PocketGuide" esta aplicación 
 > marvel.apiKey="here_your_api_key_from_developer.marvel.com"
 > marvel.privateKey="here_your_private_key_from_developer.marvel.com"
 
+## Video Demo on YouTube
+[![SC2 Video](https://user-images.githubusercontent.com/10730150/114312120-d36f1380-9af1-11eb-89b9-8378e84dee5b.png)](https://www.youtube.com/watch?v=2vfhOPgtKeQ "SC2 Mini game - Click to Watch!")
+
 ## Resumen de la arquitectura (MVVM)
 
 ### Grafico de MVVM
@@ -24,6 +27,7 @@ Este repositorio contiene la aplicación Android "PocketGuide" esta aplicación 
 
 
 ### Libraries
+
  - Dagger2
  - Navigaton (Android JetPack)
  - ViewModel (Android JetPack)
