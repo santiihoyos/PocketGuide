@@ -24,6 +24,13 @@ Este repositorio contiene la aplicación Android "PocketGuide" esta aplicación 
 ### Gráfico de MVVM
 ![arquitectura](https://user-images.githubusercontent.com/10730150/113680141-d6689f00-96c0-11eb-979d-a0aed945d296.jpg)
 
+Esta arquitectura esta pensada para que la capa vista sea totalmente agnóstica a la implementación del viewModel (la vista pide y ESCUCHA al viewModel y mediante la abstracción del ViewModel) es importante esto puesto que el viewModel no debe tener referencias a la vista y mucho menos llamar a ninguna función en la capa de vista. Para devolver los datos a la vista se usa LiveData o Flows o directamente en el return de la función puesto que **trabajamos con corutinas y nos permite una programación asíncrona con una sintaxis síncrona.**
+
+Los ViewModels tienen como dependencia un Interactor que implementan cada uno su contrato en función de la pantalla en la que estén e interactúan con la capa de datos a través de los UseCases; estos últimos su utilidad es encapsular los posibles errores de la api y no exponer HttpExceptions por ejemplo al Interactor puesto que por ejemplo los modulos feature por ejemplo :characters no tienen retrofit como dependencia.
+
+Los repositorios tienen su abstracción que define como deben comportarse y su implementación que usando una biblioteca se implementan. Por ejemplo para el caso de MarvelRestRepository.kt su implementación MarvelRestRpositoryRetrofitImpl.kt es su implementación usando Retrofit. El inyector solo expone la abstracción.
+
+
 ### Bibliotecas
 
  - Dagger2
@@ -69,3 +76,6 @@ Módulo de entrada a la app, además contiene un Fragment dummy para rellenar el
 
 ## Tests
 A modo de ejemplo he añadido 3 test sobre 3 disitntas caps de la app sobre el interactor(CharacterDetailInteractorImpl) y view model(CharacterDetailViewModelIImpl) y sobre la vista (CharacterDetailActivityTest) en el modulo :characters y para los flavors marvelDebug y rickAndMortyDebug. Nota: importante configurar emulador para lanzar los androidTests.
+
+## CI (Integración continua)
+Se ha creado un job en el workflow principal para pasar los test unitarios en cada commit que se haga sobre la rama default (master) o sobre otra rama con Pull request abierta. Se peude encontrar en el directorio **.github/workflows**
