@@ -9,14 +9,27 @@ import androidx.lifecycle.ViewModelProvider
  */
 abstract class BaseFragment<T : BaseViewModel> : Fragment() {
 
+    /**
+     * ViewModel.Factoy to provide ViewModel returned by getViewModelAbstract()
+     * function.
+     */
     protected abstract val viewModelProviderFactory: ViewModelProvider.Factory
 
+    /**
+     * ViewModel instance, this isntance type is defined by getViewModelAbstract()
+     * function return
+     */
     @Suppress("UNCHECKED_CAST")
     protected val viewModel: T by lazy {
 
         ViewModelProvider(this, viewModelProviderFactory).get(getViewModelAbstract())
     }
 
+    /**
+     * Override to call inject() on creation
+     *
+     * @param savedInstanceState - for base implementation
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         inject()

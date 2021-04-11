@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
-class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
+abstract class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
 
     @Inject
     override lateinit var viewModelProviderFactory: ViewModelProvider.Factory
@@ -63,7 +63,7 @@ class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
 
         intent.extras?.let { _bundle ->
 
-            CharacterDetailActivityArgs.fromBundle(_bundle).characterId
+            CharacterDetailActivityImplArgs.fromBundle(_bundle).characterId
         }
     }
 
@@ -90,7 +90,7 @@ class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
         setContentView(R.layout.activity_character_detail)
         setupCharacterDetail()
         setupToolbar("")
-        characterName = intent.extras?.let { _bundle -> CharacterDetailActivityArgs.fromBundle(_bundle).characterName }
+        characterName = intent.extras?.let { _bundle -> CharacterDetailActivityImplArgs.fromBundle(_bundle).characterName }
         favButton.setOnClickListener(::onFavButtonClick)
     }
 
@@ -103,6 +103,50 @@ class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    /**
+     * Refresh with incoming [Character] instance all view data values.
+     *
+     * note: suppress are to maintain compatibility with other flavors as quick fix
+     *
+     * @param character - Character entity to paint
+     */
+    @Suppress("USELESS_ELVIS", "RemoveRedundantCallsOfConversionMethods", "MemberVisibilityCanBePrivate")
+    abstract fun paintCharacterValues(character: Character)
+
+    /**
+     * setups fav button with viewModel response about favorite id
+     */
+    @Suppress("MemberVisibilityCanBePrivate")
+    protected fun refreshFavButtonState(characterId: String) {
+
+        lifecycleScope.launch(Dispatchers.IO) {
+
+            val isFavThisCharacter = viewModel.isUserCharacterFavorite(characterId)
+
+            favButton.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this@CharacterDetailActivity,
+                    if (isFavThisCharacter) R.drawable.ic_heart_filled else R.drawable.ic_heart_empty
+                )
+            )
+        }
+    }
+
+    /**
+     * Setups toolbar
+     *
+     * @param title - title (character name)
+     */
+    protected fun setupToolbar(title: String) {
+
+        toolbar.title = title
+        toolbar.setTitleTextColor(ContextCompat.getColor(this, android.R.color.white))
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back_arrow)
     }
 
     /**
@@ -127,27 +171,11 @@ class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
                 showErrorRetryDialog(R.string.characterDetailActivity_error_message)
             } else {
 
-                refreshDataValues(character)
+                paintCharacterValues(character)
             }
             detailContainer.visible()
             loadingGroup.invisible()
         }
-    }
-
-    /**
-     * Refresh with incoming [Character] instance all view data values.
-     *
-     * note: suppress are to maintain compatibility with other flavors as quick fix
-     *
-     * @param character - Character entity to paint
-     */
-    @Suppress("USELESS_ELVIS", "RemoveRedundantCallsOfConversionMethods")
-    private fun refreshDataValues(character: Character) {
-
-        setupToolbar(character.name ?: "")
-        val name = findViewById<AppCompatTextView>(R.id.characterDetailActivity_value_name)
-        name.text = character.name
-        refreshFavButtonState(character.id.toString())
     }
 
     /**
@@ -173,39 +201,6 @@ class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>() {
     private fun onCancelErrorDialogClick() {
 
         dismissDialog()
-    }
-
-    /**
-     * Setups toolbar
-     *
-     * @param title - title (character name)
-     */
-    private fun setupToolbar(title: String) {
-
-        toolbar.title = title
-        toolbar.setTitleTextColor(ContextCompat.getColor(this, android.R.color.white))
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back_arrow)
-    }
-
-    /**
-     * setups fav buton
-     */
-    private fun refreshFavButtonState(characterId: String) {
-
-        lifecycleScope.launch(Dispatchers.IO) {
-
-            val isFavThisCharacter = viewModel.isUserCharacterFavorite(characterId)
-
-            favButton.setImageDrawable(
-                ContextCompat.getDrawable(
-                    this@CharacterDetailActivity,
-                    if (isFavThisCharacter) R.drawable.ic_heart_filled else R.drawable.ic_heart_empty
-                )
-            )
-        }
     }
 
     /**

@@ -5,7 +5,7 @@
         <activity
             android:exported="false"
             android:theme="@style/Theme.PocketGuide"
-            android:name=".detail.view.CharacterDetailActivity"/>
+            android:name=".detail.view.CharacterDetailActivityImpl"/>
 
         <uses-library android:name="android.test.runner" android:required="false" />
 
