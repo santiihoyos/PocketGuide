@@ -115,13 +115,11 @@ abstract class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>(
      *
      * @param character - Character entity to paint
      */
-    @Suppress("USELESS_ELVIS", "RemoveRedundantCallsOfConversionMethods", "MemberVisibilityCanBePrivate")
     abstract fun paintCharacterValues(character: Character)
 
     /**
      * setups fav button with viewModel response about favorite id
      */
-    @Suppress("MemberVisibilityCanBePrivate")
     protected fun refreshFavButtonState(characterId: String) {
 
         lifecycleScope.launch(Dispatchers.IO) {
