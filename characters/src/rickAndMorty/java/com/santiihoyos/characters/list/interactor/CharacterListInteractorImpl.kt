@@ -6,7 +6,6 @@ import com.santiihoyos.api_rickandmorty.usecase.GetCharactersPagingUseCase
 import com.santiihoyos.characters.entity.Character
 import com.santiihoyos.base_api.usecase.UseCaseException
 import com.santiihoyos.characters.entity.mappers.CharacterMapper
-import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class CharacterListInteractorImpl @Inject constructor(

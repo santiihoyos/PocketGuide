@@ -1,7 +1,6 @@
 package com.santiihoyos.characters.list.view
 
 import android.os.Bundle
-import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.button.MaterialButton
 import com.santiihoyos.base.feature.abstracts.BaseFragment
 import com.santiihoyos.base.extensions.gone
 import com.santiihoyos.base.extensions.invisible
@@ -72,6 +72,14 @@ class CharacterListFragment : BaseFragment<CharacterListViewModel>() {
     }
 
     /**
+     * SwipeRefreshLayout of characters items
+     */
+    private val retryButton: MaterialButton? by lazy {
+
+        view?.findViewById(R.id.characters_charactersFragment_retry)
+    }
+
+    /**
      * Group to show when api data comes empty
      */
     private val emptyGroup: Group? by lazy {
@@ -95,7 +103,8 @@ class CharacterListFragment : BaseFragment<CharacterListViewModel>() {
         showLoading()
         setupRecyclerView()
         setupRefreshLayout()
-        bindPageSourceToAdapter()
+        bindPagerToAdapter()
+        retryButton?.setOnClickListener { characterAdapter.retry() }
     }
 
     /**
@@ -143,24 +152,20 @@ class CharacterListFragment : BaseFragment<CharacterListViewModel>() {
             else -> GridLayoutManager(context, columnCount)
         }
 
-        val adapterInstance = characterAdapter.apply {
-
-
-        }
-
-        adapter = adapterInstance
-
+        adapter = characterAdapter
         addItemDecoration(
             CharacterItemDecoration(
                 resources.getDimension(R.dimen.character_list_item_margin).toInt(),
                 columnCount
             )
         )
-
         setHasFixedSize(true)
     }
 
-    private fun bindPageSourceToAdapter() = lifecycleScope.launch(Dispatchers.IO) {
+    /**
+     * Creates binds between Pager from ViewModel and Adapter of recyclerView
+     */
+    private fun bindPagerToAdapter() = lifecycleScope.launch(Dispatchers.IO) {
 
         characterAdapter.onCharacterClickListener = ::onCharacterClickItem
         lifecycleScope.launch(Dispatchers.Main) {
@@ -173,16 +178,22 @@ class CharacterListFragment : BaseFragment<CharacterListViewModel>() {
         }
     }
 
+    /**
+     * Listen Adapter LoadState on general load
+     */
     private fun listenCharacterListAdapter(loadState: CombinedLoadStates) {
-
-        Log.i("LoadState", loadState.refresh.toString())
 
         when (loadState.refresh) {
 
             is LoadState.Error -> (activity as BaseActivity<*>).showGenericErrorRetryDialog(
                 onOkClickListener = { characterAdapter.refresh() },
                 message = R.string.characterListFragment_error_message,
-                okText = R.string.retry
+                okText = R.string.retry,
+                onCancelClickListener = {
+
+                    hideLoading()
+                    if (characterAdapter.itemCount == 0) emptyGroup.visible()
+                }
             )
 
             is LoadState.Loading -> {
@@ -192,18 +203,20 @@ class CharacterListFragment : BaseFragment<CharacterListViewModel>() {
             }
 
             is LoadState.NotLoading -> {
-                hideLoading()
 
-                //After first load results were empty
+                hideLoading()
+                //check if after first load result was empty
                 if (characterAdapter.itemCount == 0) {
 
                     emptyGroup.visible()
-
                 }
             }
         }
     }
 
+    /**
+     * Setups SwipeRefreshLayout with listener to refresh recycler
+     */
     private fun setupRefreshLayout() {
 
         swipeRefreshLayout?.setOnRefreshListener {

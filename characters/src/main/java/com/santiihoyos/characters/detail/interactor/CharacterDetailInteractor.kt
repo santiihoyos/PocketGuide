@@ -30,5 +30,5 @@ abstract class CharacterDetailInteractor: BaseInteractor() {
      */
     abstract suspend fun getFavoriteCharacterId(): String
 
-//all necessary by viewModel
+    //all necessary by viewModel
 }

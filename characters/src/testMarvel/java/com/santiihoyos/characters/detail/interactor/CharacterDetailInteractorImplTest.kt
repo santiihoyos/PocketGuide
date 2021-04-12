@@ -38,7 +38,7 @@ class CharacterDetailInteractorImplTest {
                     results = mutableListOf(
                         CharacterData(
                             id = 666,
-                            name = "Batman",  //XD
+                            name = "Flash of DC",  //XD the best forever!
                             description = null,
                             thumbnail = null,
                             modified = null,
@@ -66,7 +66,7 @@ class CharacterDetailInteractorImplTest {
 
         private val characterResponse = Character(
             id = 666,
-            name = "Batman",  //XD
+            name = "Flash of DC",  //XD the best forever!
             description = null,
             imageUrl = null,
             imageExtension = null

@@ -30,6 +30,9 @@ abstract class CharacterDetailActivity : BaseActivity<CharacterDetailViewModel>(
     @Inject
     override lateinit var viewModelProviderFactory: ViewModelProvider.Factory
 
+    /**
+     * Container of data view
+     */
     private val detailContainer: CoordinatorLayout by lazy {
 
         findViewById(R.id.characterDetailActivity_container_ConstraintLayout)

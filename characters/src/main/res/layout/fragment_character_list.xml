@@ -70,7 +70,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/characters_charactersFragment_retry"
-        style="@style/Widget.AppCompat.Button.Borderless"
+        style="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

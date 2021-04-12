@@ -58,7 +58,7 @@ abstract class BaseActivity<T : BaseViewModel> : AppCompatActivity() {
 
         if (onCancelClickListener != null) {
 
-            builder.setNegativeButton(android.R.string.cancel) { _, _ -> onCancelClickListener() }
+            builder.setNegativeButton(android.R.string.cancel) { _, _ -> this.dismissDialog(); onCancelClickListener() }
         }
 
         currentGenericRetryErrorDialog = builder.create()

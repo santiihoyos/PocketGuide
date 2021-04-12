@@ -4,7 +4,6 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-
 class CharacterItemDecoration(
     private val mSizeGridSpacingPx: Int,
     private val mGridSize: Int

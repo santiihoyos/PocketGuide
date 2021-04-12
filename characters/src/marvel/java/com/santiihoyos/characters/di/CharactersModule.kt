@@ -1,7 +1,6 @@
 package com.santiihoyos.characters.di
 
 import androidx.lifecycle.ViewModelProvider
-import com.santiihoyos.api_marvel.response.CharacterResponse
 import com.santiihoyos.base.feature.abstracts.BaseViewModel
 import com.santiihoyos.base.di.ViewModelKey
 import com.santiihoyos.base.di.ViewModelProviderFactory
@@ -13,7 +12,6 @@ import com.santiihoyos.characters.list.interactor.CharacterListInteractorImpl
 import com.santiihoyos.characters.list.interactor.CharacterListInteractor
 import com.santiihoyos.characters.list.viewmodel.CharacterListViewModel
 import com.santiihoyos.characters.list.viewmodel.CharacterListViewModelImpl
-import com.santiihoyos.characters.entity.mappers.CharacterMapper
 import com.santiihoyos.characters.list.view.adapter.CharacterRecyclerViewAdapter
 import com.santiihoyos.characters.list.view.adapter.CharacterRecyclerViewAdapterImpl
 import dagger.Binds
