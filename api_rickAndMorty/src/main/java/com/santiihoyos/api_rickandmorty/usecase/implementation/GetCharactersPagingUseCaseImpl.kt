@@ -26,6 +26,9 @@ internal class GetCharactersPagingUseCaseImpl @Inject constructor(
         )
     } catch (ex: Exception) {
 
-        TODO("manage other possible errors of this endpoint")
+        throw UseCaseException(
+            httpCode = -1,
+            message = ex.cause?.message
+        )
     }
 }
