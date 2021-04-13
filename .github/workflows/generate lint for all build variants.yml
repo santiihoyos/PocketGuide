@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-	  - name: GitHub Action for Android Lint
-  		uses: yutailang0119/action-android-lint@v1.1.0
-
+      
+      - name: GitHub Action for Android Lint
+        uses: yutailang0119/action-android-lint@v1.1.0
+	
