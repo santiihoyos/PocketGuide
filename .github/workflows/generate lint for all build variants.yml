@@ -17,4 +17,3 @@ jobs:
       
       - name: GitHub Action for Android Lint
         uses: yutailang0119/action-android-lint@v1.1.0
-	
