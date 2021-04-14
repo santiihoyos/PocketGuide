@@ -33,9 +33,9 @@ android {
     signingConfigs {
         release {
             storeFile file("../test_keystore.jks")
-            storePassword "11paths"
-            keyAlias "11paths"
-            keyPassword "11paths"
+            storePassword "santiihoyos"
+            keyAlias "santiihoyos"
+            keyPassword "santiihoyos"
         }
     }
 

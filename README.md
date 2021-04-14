@@ -1,4 +1,8 @@
-# PocketGuide Android [![CI](https://github.com/santiihoyos/PocketGuide/actions/workflows/test%20for%20all%20build%20variants%20and%20flavors.yml/badge.svg?branch=master)](https://github.com/santiihoyos/PocketGuide/actions/workflows/test%20for%20all%20build%20variants%20and%20flavors.yml)
+# PocketGuide Android 
+[![CI](https://github.com/santiihoyos/PocketGuide/actions/workflows/test%20for%20all%20build%20variants%20and%20flavors.yml/badge.svg?branch=master)](https://github.com/santiihoyos/PocketGuide/actions/workflows/test%20for%20all%20build%20variants%20and%20flavors.yml)
+[![android-studio](https://img.shields.io/badge/4.1.3-success.svg?style=flat&logo=android-studio&label=Android%20Studio)](https://developer.android.com/studio/)
+[![kotlin](https://img.shields.io/badge/1.4.31-success.svg?style=flat&logo=kotlin&label=Kotlin)](https://github.com/JetBrains/kotlin/releases/tag/v1.4.10)
+[![gradle-plugin](https://img.shields.io/badge/4.1.3-success.svg?style=flat&logo=gradle&label=Gradle%20Plugin)](https://developer.android.com/studio/releases/gradle-plugin)
 
 ### Code challenges for: 
   - Paradigma Digital (flavor for Rick&MortyApi)
