@@ -66,7 +66,7 @@ Contiene el código compartido entre los modulos api que son ":api_rickAndMorty"
 ### :api_rickAndMorty
 Contiene la abstracción del repositorio de http://rickandmortyapi.com y la implementación que solo es accesible internamente y expuesta mediante los abstractos o interfaces con Dagger2.
 
-### :api_rickAndMorty
+### :api_marvel
 Contiene la abstracción del repositorio de http://developer.marvel.com y la implementación que solo es accesible internamente y expuesta mediante los abstractos o interfaces con Dagger2.
 
 ### :api_keyvalue
