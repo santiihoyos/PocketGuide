@@ -1,7 +1,7 @@
 # PocketGuide Android 
 [![CI](https://github.com/santiihoyos/PocketGuide/actions/workflows/test%20for%20all%20build%20variants%20and%20flavors.yml/badge.svg?branch=master)](https://github.com/santiihoyos/PocketGuide/actions/workflows/test%20for%20all%20build%20variants%20and%20flavors.yml)
 [![android-studio](https://img.shields.io/badge/4.1.3-success.svg?style=flat&logo=android-studio&label=Android%20Studio)](https://developer.android.com/studio/)
-[![kotlin](https://img.shields.io/badge/1.4.31-success.svg?style=flat&logo=kotlin&label=Kotlin)](https://github.com/JetBrains/kotlin/releases/tag/v1.4.10)
+[![kotlin](https://img.shields.io/badge/1.4.32-success.svg?style=flat&logo=kotlin&label=Kotlin)](https://github.com/JetBrains/kotlin/releases/tag/v1.4.32)
 [![gradle-plugin](https://img.shields.io/badge/4.1.3-success.svg?style=flat&logo=gradle&label=Gradle%20Plugin)](https://developer.android.com/studio/releases/gradle-plugin)
 
 ### Code challenges for: 
@@ -82,4 +82,4 @@ Módulo de entrada a la app, además contiene un Fragment dummy para rellenar el
 A modo de ejemplo he añadido 3 test sobre 3 disitntas caps de la app sobre el interactor(CharacterDetailInteractorImpl) y view model(CharacterDetailViewModelIImpl) y sobre la vista (CharacterDetailActivityTest) en el modulo :characters y para los flavors marvelDebug y rickAndMortyDebug. Nota: importante configurar emulador para lanzar los androidTests.
 
 ## CI (Integración continua)
-Se ha creado un job en el workflow principal para pasar los test unitarios en cada commit que se haga sobre la rama default (master) o sobre otra rama con Pull request abierta. Se peude encontrar en el directorio **.github/workflows**
+Se ha creado un job en el workflow principal para pasar los test unitarios en cada commit que se haga sobre la rama default (master) o sobre otra rama con Pull request abierta. Se puede encontrar en el directorio **.github/workflows**
