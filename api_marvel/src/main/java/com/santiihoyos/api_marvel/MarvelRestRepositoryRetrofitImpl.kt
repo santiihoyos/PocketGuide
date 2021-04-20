@@ -34,7 +34,7 @@ internal interface MarvelRestRepositoryRetrofitImpl : MarvelRestRepository {
 
         private const val API_URL = "https://gateway.marvel.com:443"
         private const val HEADER_ACCEPT_JSON = "Accept: application/json"
-        private const val HEADER_CONTENT_TYPE_JSON = "Content-Type: application/json"
+        //private const val HEADER_CONTENT_TYPE_JSON = "Content-Type: application/json"
         private const val API_KEY_PARAM_NAME = "apikey"
 
         private lateinit var instance: MarvelRestRepositoryRetrofitImpl

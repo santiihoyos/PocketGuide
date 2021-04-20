@@ -17,7 +17,7 @@ internal interface RickAndMortyRestRepositoryRetrofitImpl : RickAndMortyRestRepo
 
         private const val API_URL = "https://rickandmortyapi.com/api/"
         private const val HEADER_ACCEPT_JSON = "Accept: application/json"
-        private const val HEADER_CONTENT_TYPE_JSON = "Content-Type: application/json"
+        //private const val HEADER_CONTENT_TYPE_JSON = "Content-Type: application/json"
 
         private lateinit var instance: RickAndMortyRestRepositoryRetrofitImpl
 
@@ -58,11 +58,11 @@ internal interface RickAndMortyRestRepositoryRetrofitImpl : RickAndMortyRestRepo
     }
 
     @GET("character")
-    @Headers(HEADER_ACCEPT_JSON, HEADER_CONTENT_TYPE_JSON)
+    @Headers(HEADER_ACCEPT_JSON)
     override suspend fun getCharactersAtPage(@Query("page") page: Int): CharactersResponse
 
     @GET("character/{id}")
-    @Headers(HEADER_ACCEPT_JSON, HEADER_CONTENT_TYPE_JSON)
+    @Headers(HEADER_ACCEPT_JSON)
     override suspend fun getCharacterById(@Path("id") id: String): CharacterResponse
 
     //Add more Rick&Morty universe endpoints.
