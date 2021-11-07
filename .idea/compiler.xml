@@ -13,10 +13,6 @@
       <module name="Pocket.characters" target="1.8" />
       <module name="Pocket.notes" target="1.8" />
       <module name="Pocket.settings" target="1.8" />
-      <module name="PocketGuide.api_keyvalue" target="11" />
-      <module name="PocketGuide.app" target="11" />
-      <module name="PocketGuide.base" target="11" />
-      <module name="PocketGuide.characters" target="11" />
       <module name="PocketGuide.notes" target="1.8" />
       <module name="PocketGuide.repositoryRickAndMorty" target="1.8" />
       <module name="PocketGuide.settings" target="1.8" />
