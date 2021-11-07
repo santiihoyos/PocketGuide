@@ -14,17 +14,6 @@ buildscript {
     configurations.classpath.exclude group: 'com.android.tools.external.lombok'
 }
 
-allprojects {
-
-    repositories {
-        mavenCentral()
-        google()
-        flatDir {
-            dirs 'libs'
-        }
-    }
-}
-
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
