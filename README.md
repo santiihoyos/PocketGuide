@@ -4,13 +4,37 @@
 [![kotlin](https://img.shields.io/badge/1.4.32-success.svg?style=flat&logo=kotlin&label=Kotlin)](https://github.com/JetBrains/kotlin/releases/tag/v1.4.32)
 [![gradle-plugin](https://img.shields.io/badge/4.1.3-success.svg?style=flat&logo=gradle&label=Gradle%20Plugin)](https://developer.android.com/studio/releases/gradle-plugin)
 
-### Code challenges for: 
-  - Paradigma Digital (flavor for Rick&MortyApi)
-  - OpenBank (flavor for MarvelApi)
+## Get started!
 
-#### with ❤️ by @santiihoyos
+⚠️ Attention: For **marvelDebug** or **marvelRelease** flavors You need setup this props into **local.properties**:
+> marvel.apiKey="here_your_api_key_from_developer.marvel.com"
+> marvel.privateKey="here_your_private_key_from_developer.marvel.com"
 
-###### (Translate to English incoming...)
+> For rickAndMorty flavor you don't need any key it is public.
+
+## Vídeo Demo en YouTube
+[![SC2 Video](https://user-images.githubusercontent.com/10730150/114312120-d36f1380-9af1-11eb-89b9-8378e84dee5b.png)](https://www.youtube.com/watch?v=2vfhOPgtKeQ "SC2 Mini game - Click to Watch!")
+
+## Resumen de la arquitectura (MVVM)
+
+### Gráfico de MVVM
+![arquitectura](https://user-images.githubusercontent.com/10730150/113680141-d6689f00-96c0-11eb-979d-a0aed945d296.jpg)
+
+Esta arquitectura esta pensada para que la capa vista sea totalmente agnóstica a la implementación del viewModel (la vista pide y ESCUCHA al viewModel y mediante la abstracción del ViewModel) es importante esto puesto que el viewModel no debe tener referencias a la vista y mucho menos llamar a ninguna función en la capa de vista. Para devolver los datos a la vista se usa LiveData o Flows o directamente en el return de la función puesto que **trabajamos con corutinas y nos permite una programación asíncrona con una sintaxis síncrona.**
+
+Los ViewModels tienen como dependencia un Interactor que implementan cada uno su contrato en función de la pantalla en la que estén e interactúan con la capa de datos a través de los UseCases; estos últimos su utilidad es encapsular los posibles errores de la api y no exponer HttpExceptions por ejemplo al Interactor puesto que por ejemplo los modulos feature por ejemplo :characters no tienen retrofit como dependencia.
+
+Los repositorios tienen su abstracción que define como deben comportarse y su implementación que usando una biblioteca se implementan. Por ejemplo para el caso de MarvelRestRepository.kt su implementación MarvelRestRpositoryRetrofitImpl.kt es su implementación usando Retrofit. El inyector solo expone la abstracción.
+
+
+
+This repository contains "PocketGuide" native Android application. The App allows to explore characters and get info about them from Rick&Morty open api and Marvel's Developer api. Many thanks to its developers.
+
+  - http://rickandmortyapi.com
+  - https://developer.marvel.com
+
+
+###### (Español)  -- WIP
 
 Este repositorio contiene la aplicación Android "PocketGuide" esta aplicación permite al usuario consultar las apis de http://rickandmortyapi.com y https://developer.marvel.com
 
@@ -83,3 +107,6 @@ A modo de ejemplo he añadido 3 test sobre 3 disitntas caps de la app sobre el i
 
 ## CI (Integración continua)
 Se ha creado un job en el workflow principal para pasar los test unitarios en cada commit que se haga sobre la rama default (master) o sobre otra rama con Pull request abierta. Se puede encontrar en el directorio **.github/workflows**
+
+
+#### with ❤️ by @santiihoyos
