@@ -36,6 +36,7 @@ interface CharactersComponent {
         fun init(
             context: Context,
             apiKey: String,
+            baseUrl: String,
             privateKey: String
         ): CharactersComponent {
 
@@ -43,7 +44,7 @@ interface CharactersComponent {
 
                 instance = DaggerCharactersComponent.builder()
                     .application(context)
-                    .apiRickAndMortyComponent(ApiMarvelComponent.init(apiKey, privateKey))
+                    .apiRickAndMortyComponent(ApiMarvelComponent.init(apiKey, baseUrl, privateKey))
                     .apiKeyValueComponent(ApiKeyValueComponent.init(context))
                     .build()
             }

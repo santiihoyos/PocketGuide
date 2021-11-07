@@ -31,8 +31,10 @@ internal object ApiMarvelModule {
 
     var apiKey: String = ""
 
+    var baseUrl: String = ""
+
     var privateKey: String = ""
 
     @Provides
-    fun provideRestRepository(): MarvelRestRepository = MarvelRestRepositoryRetrofitImpl.getInstance(apiKey, privateKey)
+    fun provideRestRepository(): MarvelRestRepository = MarvelRestRepositoryRetrofitImpl.getInstance(apiKey, baseUrl, privateKey)
 }

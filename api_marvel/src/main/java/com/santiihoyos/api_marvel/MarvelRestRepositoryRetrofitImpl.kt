@@ -32,9 +32,7 @@ internal interface MarvelRestRepositoryRetrofitImpl : MarvelRestRepository {
 
     companion object {
 
-        private const val API_URL = "https://gateway.marvel.com:443"
         private const val HEADER_ACCEPT_JSON = "Accept: application/json"
-        //private const val HEADER_CONTENT_TYPE_JSON = "Content-Type: application/json"
         private const val API_KEY_PARAM_NAME = "apikey"
 
         private lateinit var instance: MarvelRestRepositoryRetrofitImpl
@@ -46,13 +44,14 @@ internal interface MarvelRestRepositoryRetrofitImpl : MarvelRestRepository {
          */
         fun getInstance(
             apiKey: String,
+            baseUrl: String,
             privateKey: String
         ): MarvelRestRepositoryRetrofitImpl {
 
             if (!Companion::instance.isInitialized) {
                 instance = Retrofit.Builder()
                     .client(getOkHttpClient(apiKey, privateKey))
-                    .baseUrl(API_URL)
+                    .baseUrl(baseUrl)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
                     .create(MarvelRestRepositoryRetrofitImpl::class.java)

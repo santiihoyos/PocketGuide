@@ -52,6 +52,7 @@ interface AppComponent {
                 val charactersComponent = CharactersComponent.init(
                     application,
                     BuildConfig.API_KEY,
+                    BuildConfig.BASE_URL,
                     BuildConfig.PRIVATE_KEY
                 )
 

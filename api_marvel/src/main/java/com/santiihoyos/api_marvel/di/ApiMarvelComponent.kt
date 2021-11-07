@@ -36,12 +36,14 @@ interface ApiMarvelComponent {
          */
         fun init(
             apiKey: String,
+            baseUrl: String,
             privateKey: String
         ): ApiMarvelComponent {
 
             if (!this::instance.isInitialized) {
 
                 ApiMarvelModule.apiKey = apiKey
+                ApiMarvelModule.baseUrl = baseUrl
                 ApiMarvelModule.privateKey = privateKey
                 instance = DaggerApiMarvelComponent.builder().build()
             }
