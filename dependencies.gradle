@@ -11,7 +11,7 @@ allprojects {
 ext {
 
     //Dependencies in APK
-    kotlin_version = '1.4.32'
+    kotlin_version = '1.5.10'
     buildGradleVersion = '7.0.3'
     dagger_version = '2.34'
     retrofitVersion = '2.9.0'

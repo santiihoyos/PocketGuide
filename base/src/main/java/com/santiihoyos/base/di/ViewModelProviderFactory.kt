@@ -13,6 +13,9 @@ class ViewModelProviderFactory @Inject constructor(
     private val creators: Map<Class<out BaseViewModel>, @JvmSuppressWildcards Provider<BaseViewModel>>
 ) : ViewModelProvider.Factory {
 
-    @Suppress("UNCHECKED_CAST", "TYPE_INFERENCE_ONLY_INPUT_TYPES_WARNING")
-    override fun <T : ViewModel> create(modelClass: Class<T>) = creators[modelClass]?.get() as T
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+
+        return creators[modelClass as Class<out BaseViewModel>]?.get() as T
+    }
 }
